@@ -74,7 +74,7 @@
             toggle.setAttribute('aria-controls', panelId);
             panel.setAttribute('aria-labelledby', toggleId);
 
-            const shouldOpen = card.classList.contains(CLASSES.open) || index === 0;
+            const shouldOpen = card.classList.contains(CLASSES.open);
             setServiceCardState(card, shouldOpen);
 
             toggle.addEventListener('click', () => {
