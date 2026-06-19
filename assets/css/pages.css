@@ -1378,3 +1378,602 @@
         margin-bottom: 18px;
     }
 }
+/* =========================
+   SERVICES CTA — BLACK 3D CARD
+   ========================= */
+
+.services-cta {
+    position: relative;
+    padding: clamp(46px, 6vw, 72px) 0;
+    color: var(--color-white);
+    background: #050607;
+    overflow: hidden;
+}
+
+.services-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg,
+            rgba(255, 255, 255, 0.045),
+            transparent 18%,
+            transparent 82%,
+            rgba(255, 255, 255, 0.04));
+    pointer-events: none;
+}
+
+.services-cta::after {
+    content: "";
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    pointer-events: none;
+}
+
+.services-cta__card {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(24px, 5vw, 70px);
+    min-height: 250px;
+    padding: clamp(28px, 4vw, 46px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 34px;
+    color: var(--color-white);
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.032)),
+        #0b0d0f;
+    box-shadow:
+        0 34px 90px rgba(0, 0, 0, 0.52),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition:
+        translate var(--transition-main),
+        rotate var(--transition-main),
+        border-color var(--transition-main),
+        box-shadow var(--transition-main);
+}
+
+/* 3D задний слой */
+.services-cta__card::before {
+    content: "";
+    position: absolute;
+    inset: 14px -14px -14px 14px;
+    z-index: -1;
+    border-radius: 34px;
+    background: rgba(255, 255, 255, 0.055);
+    transform: translateZ(-1px);
+    pointer-events: none;
+    transition:
+        inset var(--transition-main),
+        background var(--transition-main);
+}
+
+/* Блик */
+.services-cta__card::after {
+    content: "";
+    position: absolute;
+    top: -45%;
+    left: -35%;
+    width: 46%;
+    height: 190%;
+    z-index: 0;
+    background: linear-gradient(115deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.03) 26%,
+            rgba(255, 255, 255, 0.26) 48%,
+            rgba(255, 255, 255, 0.04) 64%,
+            transparent 100%);
+    transform: rotate(18deg) translateX(-120%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.services-cta__card:hover {
+    translate: 0 -6px;
+    rotate: 0.25deg;
+    border-color: rgba(255, 255, 255, 0.24);
+    box-shadow:
+        0 44px 110px rgba(0, 0, 0, 0.62),
+        0 0 40px rgba(255, 255, 255, 0.055),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.services-cta__card:hover::before {
+    inset: 18px -18px -18px 18px;
+    background: rgba(255, 255, 255, 0.075);
+}
+
+.services-cta__card:hover::after {
+    opacity: 1;
+    animation: servicesCtaShine 950ms ease both;
+}
+
+@keyframes servicesCtaShine {
+    from {
+        transform: rotate(18deg) translateX(-120%);
+    }
+
+    to {
+        transform: rotate(18deg) translateX(360%);
+    }
+}
+
+.services-cta__content {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+}
+
+.services-cta__content .section-kicker {
+    color: var(--color-yellow);
+}
+
+.services-cta__content h2 {
+    max-width: 720px;
+    color: var(--color-white);
+    font-size: clamp(2rem, 3.4vw, 3.45rem);
+    line-height: 1.02;
+}
+
+.services-cta__content p:not(.section-kicker) {
+    max-width: 660px;
+    margin-top: 16px;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 1rem;
+    line-height: 1.66;
+}
+
+.services-cta__actions {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.services-cta .btn--primary {
+    background: var(--color-lime);
+    box-shadow:
+        0 18px 44px rgba(140, 255, 63, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.services-cta .btn--secondary {
+    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.075);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.services-cta .btn--secondary:hover {
+    color: var(--color-graphite);
+    border-color: var(--color-yellow);
+    background: var(--color-yellow);
+}
+
+@media (max-width: 980px) {
+    .services-cta__card {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .services-cta__actions {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 560px) {
+    .services-cta {
+        padding: 42px 0;
+    }
+
+    .services-cta__card {
+        padding: 24px;
+        border-radius: 26px;
+    }
+
+    .services-cta__card::before {
+        inset: 10px -10px -10px 10px;
+        border-radius: 26px;
+    }
+
+    .services-cta__content h2 {
+        font-size: clamp(1.9rem, 10vw, 2.55rem);
+    }
+}
+
+/* =========================
+   ALL SERVICES QUESTIONS ACCORDION
+   ========================= */
+
+.services-questions {
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 8% 18%, rgba(140, 255, 63, 0.13), transparent 28%),
+        radial-gradient(circle at 92% 8%, rgba(255, 216, 77, 0.14), transparent 26%),
+        linear-gradient(180deg, #ffffff 0%, #fbfaf6 100%);
+}
+
+.services-questions::before {
+    content: "";
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(23, 26, 29, 0.12), transparent);
+    pointer-events: none;
+}
+
+.services-questions__grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
+    gap: clamp(28px, 6vw, 86px);
+    align-items: start;
+}
+
+.services-questions__intro {
+    position: sticky;
+    top: calc(var(--header-height) + 28px);
+}
+
+.services-questions__intro h2 {
+    max-width: 640px;
+    color: var(--text-dark);
+}
+
+.services-questions__intro>p:not(.section-kicker) {
+    max-width: 560px;
+    margin-top: 18px;
+    color: var(--text-body);
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+.services-questions__note {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 26px;
+    padding: 18px;
+    border: 1px solid rgba(23, 26, 29, 0.1);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.78);
+    box-shadow: 0 18px 48px rgba(16, 18, 20, 0.07);
+}
+
+.services-questions__note svg {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 auto;
+    color: var(--color-lime);
+}
+
+.services-questions__note span {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+.services-questions__accordion {
+    display: grid;
+    gap: 14px;
+    width: 100%;
+}
+
+.services-question-item {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(23, 26, 29, 0.1);
+    border-radius: 28px;
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(248, 247, 242, 0.86));
+    box-shadow:
+        0 22px 62px rgba(16, 18, 20, 0.09),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    transition:
+        border-color var(--transition-main),
+        box-shadow var(--transition-main),
+        background var(--transition-main),
+        translate var(--transition-main);
+}
+
+.services-question-item::before {
+    content: "";
+    position: absolute;
+    width: 190px;
+    height: 190px;
+    right: -86px;
+    top: -98px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle, rgba(140, 255, 63, 0.24), rgba(255, 216, 77, 0.09), transparent 68%);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity var(--transition-main),
+        scale var(--transition-main);
+}
+
+.services-question-item::after {
+    content: "";
+    position: absolute;
+    left: 28px;
+    right: 28px;
+    bottom: 0;
+    height: 3px;
+    border-radius: var(--radius-pill) var(--radius-pill) 0 0;
+    background: var(--gradient-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-main);
+}
+
+.services-question-item:hover,
+.services-question-item.is-open {
+    translate: 0 -3px;
+    border-color: rgba(140, 255, 63, 0.42);
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, 1), rgba(233, 255, 217, 0.52));
+    box-shadow:
+        0 30px 76px rgba(16, 18, 20, 0.13),
+        0 0 30px rgba(140, 255, 63, 0.1);
+}
+
+.services-question-item:hover::before,
+.services-question-item.is-open::before {
+    opacity: 1;
+    scale: 1.08;
+}
+
+.services-question-item.is-open::after {
+    transform: scaleX(1);
+}
+
+.services-question-button {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 82px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+    padding: 22px clamp(22px, 3vw, 34px);
+    color: var(--text-dark);
+    text-align: left;
+}
+
+.services-question-button span:first-child {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+    color: var(--text-dark);
+    font-family: var(--font-display);
+    font-size: clamp(1.08rem, 1.55vw, 1.35rem);
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: -0.04em;
+}
+
+.services-question-button span:first-child svg {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 auto;
+    color: var(--color-graphite);
+    transition:
+        color var(--transition-main),
+        translate var(--transition-main),
+        rotate var(--transition-main),
+        filter var(--transition-main);
+}
+
+.services-question-item:hover .services-question-button span:first-child svg,
+.services-question-item.is-open .services-question-button span:first-child svg {
+    color: var(--color-lime);
+    translate: 2px -2px;
+    rotate: 7deg;
+    filter: drop-shadow(0 0 14px rgba(140, 255, 63, 0.28));
+}
+
+.services-question-button__icon {
+    position: relative;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 auto;
+    border: 1px solid rgba(23, 26, 29, 0.12);
+    border-radius: 50%;
+    background: var(--color-white);
+    box-shadow: 0 10px 24px rgba(16, 18, 20, 0.08);
+    transition:
+        background var(--transition-main),
+        border-color var(--transition-main),
+        rotate var(--transition-main);
+}
+
+.services-question-button__icon::before,
+.services-question-button__icon::after {
+    content: "";
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: 14px;
+    height: 2px;
+    border-radius: var(--radius-pill);
+    background: var(--color-graphite);
+    transform: translate(-50%, -50%);
+    transition:
+        background var(--transition-main),
+        transform var(--transition-main);
+}
+
+.services-question-button__icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.services-question-item.is-open .services-question-button__icon {
+    rotate: 180deg;
+    border-color: rgba(140, 255, 63, 0.48);
+    background: var(--color-lime);
+}
+
+.services-question-item.is-open .services-question-button__icon::after {
+    transform: translate(-50%, -50%) rotate(0);
+}
+
+.services-question-panel {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.services-question-item.is-open .services-question-panel {
+    grid-template-rows: 1fr;
+}
+
+.services-question-panel__inner {
+    overflow: hidden;
+}
+
+.services-question-panel p {
+    max-width: 860px;
+    padding: 0 clamp(22px, 3vw, 34px) 26px clamp(66px, 5vw, 84px);
+    color: var(--text-body);
+    font-size: 0.98rem;
+    line-height: 1.72;
+}
+
+@media (max-width: 1180px) {
+    .services-questions__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .services-questions__intro {
+        position: relative;
+        top: auto;
+    }
+}
+
+@media (max-width: 680px) {
+    .services-question-button {
+        align-items: flex-start;
+        min-height: 76px;
+        padding: 20px;
+    }
+
+    .services-question-button span:first-child {
+        align-items: flex-start;
+        gap: 12px;
+        font-size: 1.05rem;
+    }
+
+    .services-question-button span:first-child svg {
+        width: 24px;
+        height: 24px;
+        margin-top: 1px;
+    }
+
+    .services-question-panel p {
+        padding: 0 20px 22px 56px;
+    }
+
+    .services-question-button__icon {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* =========================
+   FIX SERVICES QUESTIONS STABLE HOVER
+   ========================= */
+
+/* сами accordion items появляются плавно, но без scale */
+.services-question-item.js-reveal,
+.services-questions__note.js-reveal {
+    opacity: 0;
+    translate: 0 26px !important;
+    scale: 1 !important;
+    transform: none !important;
+    transition:
+        opacity 760ms cubic-bezier(0.16, 1, 0.3, 1),
+        translate 760ms cubic-bezier(0.16, 1, 0.3, 1),
+        border-color var(--transition-main),
+        background var(--transition-main),
+        box-shadow var(--transition-main) !important;
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, translate;
+}
+
+.services-question-item.js-reveal.is-revealed,
+.services-questions__note.js-reveal.is-revealed {
+    opacity: 1;
+    translate: 0 0 !important;
+    scale: 1 !important;
+    transform: none !important;
+    will-change: auto;
+}
+
+/* убираем подлёт на hover */
+.services-question-item:hover,
+.services-question-item.is-open,
+.services-questions__note:hover {
+    translate: 0 0 !important;
+    scale: 1 !important;
+    transform: none !important;
+}
+
+/* оставляем красивый hover, но без движения */
+.services-question-item:hover,
+.services-question-item.is-open {
+    border-color: rgba(140, 255, 63, 0.42);
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, 1), rgba(233, 255, 217, 0.52));
+    box-shadow:
+        0 26px 66px rgba(16, 18, 20, 0.12),
+        0 0 26px rgba(140, 255, 63, 0.09);
+}
+
+/* note тоже без прыжков */
+.services-questions__note {
+    transition:
+        border-color var(--transition-main),
+        box-shadow var(--transition-main),
+        background var(--transition-main);
+}
+
+.services-questions__note:hover {
+    border-color: rgba(140, 255, 63, 0.32);
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 22px 54px rgba(16, 18, 20, 0.09);
+}
+
+/* плюсик тоже не должен резко крутить всю кнопку */
+.services-question-button__icon {
+    transition:
+        background var(--transition-main),
+        border-color var(--transition-main),
+        transform var(--transition-main) !important;
+}
+
+.services-question-item.is-open .services-question-button__icon {
+    rotate: none !important;
+    transform: rotate(180deg);
+}
+
+/* сама кнопка без дерганий */
+.services-question-button {
+    transform: none !important;
+}

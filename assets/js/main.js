@@ -85,7 +85,13 @@ window.AegisHome = window.AegisHome || {};
             '.services-intro__media',
             '.home-split__media',
             '.home-priorities__preview',
-            '.about-reviews__slider'
+            '.about-reviews__slider', 
+            '.home-contact__card',
+            '.services-cta__card',
+            '.services-question-item',
+            '.services-questions__note',
+            '.home-question-answer',
+            '.home-questions__note',
         ].join(',');
 
         qsa(blockedAOSSelectors).forEach((element) => {
@@ -181,10 +187,10 @@ window.AegisHome = window.AegisHome || {};
         });
 
         window.AOS.init({
-            duration: 620,
+            duration: 850,
             easing: 'ease-out-cubic',
             once: true,
-            offset: 55,
+            offset: 95,
             delay: 0,
             mirror: false,
             anchorPlacement: 'top-bottom'
@@ -645,7 +651,13 @@ window.AegisHome = window.AegisHome || {};
             '.services-intro__media',
             '.home-split__media',
             '.home-priorities__preview',
-            '.about-reviews__slider'
+            '.about-reviews__slider',
+            '.home-contact__card',
+            '.services-cta__card',
+            '.services-question-item',
+            '.services-questions__note',
+            '.home-question-answer',
+            '.home-questions__note',
         ].join(',');
 
         const revealItems = qsa(revealSelectors);
@@ -661,7 +673,7 @@ window.AegisHome = window.AegisHome || {};
                 return;
             }
 
-            const delay = Math.min((index % 3) * 45, 90);
+            const delay = Math.min((index % 4) * 90, 270);
             item.style.setProperty('--reveal-delay', `${delay}ms`);
         });
 
@@ -683,8 +695,8 @@ window.AegisHome = window.AegisHome || {};
                 });
             },
             {
-                threshold: 0.08,
-                rootMargin: '0px 0px -6% 0px'
+                threshold: 0.18,
+                rootMargin: '0px 0px -18% 0px'
             }
         );
 

@@ -1901,78 +1901,125 @@ h3 {
     }
 }
 
-
 /* =========================
    GLOBAL REVEAL ANIMATIONS
+   visible premium reveal
    ========================= */
 
 .js-reveal {
     opacity: 0;
-    translate: 0 14px;
+    translate: 0 44px;
+    scale: 0.965;
     transition:
-        opacity 720ms cubic-bezier(0.22, 1, 0.36, 1),
-        translate 720ms cubic-bezier(0.22, 1, 0.36, 1);
+        opacity 920ms cubic-bezier(0.16, 1, 0.3, 1),
+        translate 920ms cubic-bezier(0.16, 1, 0.3, 1),
+        scale 920ms cubic-bezier(0.16, 1, 0.3, 1);
     transition-delay: var(--reveal-delay, 0ms);
-    will-change: opacity, translate;
+    will-change: opacity, translate, scale;
     backface-visibility: hidden;
 }
 
 .js-reveal.is-revealed {
     opacity: 1;
     translate: 0 0;
+    scale: 1;
     will-change: auto;
 }
 
-.js-reveal--frame {
-    translate: -12px 0;
+/* Hero / большие CTA / media появляются выразительнее */
+.hero-frame.js-reveal,
+.home-contact__card.js-reveal,
+.services-cta__card.js-reveal,
+.home-question-answer.js-reveal,
+.service-overview__media.js-reveal,
+.services-intro__media.js-reveal,
+.home-split__media.js-reveal {
+    translate: 0 56px;
+    scale: 0.955;
 }
 
-.js-reveal--frame.is-revealed {
+.hero-frame.js-reveal.is-revealed,
+.home-contact__card.js-reveal.is-revealed,
+.services-cta__card.js-reveal.is-revealed,
+.home-question-answer.js-reveal.is-revealed,
+.service-overview__media.js-reveal.is-revealed,
+.services-intro__media.js-reveal.is-revealed,
+.home-split__media.js-reveal.is-revealed {
     translate: 0 0;
+    scale: 1;
 }
 
+/* Карточки в сетках — заметный stagger */
+.home-counter.js-reveal,
+.home-service-card.js-reveal,
+.home-priority-card.js-reveal,
+.service-feature-card.js-reveal,
+.service-related-card.js-reveal,
+.services-question-item.js-reveal,
+.feature-card.js-reveal,
+.info-card.js-reveal,
+.contact-card.js-reveal {
+    translate: 0 38px;
+    scale: 0.972;
+}
+
+/* До появления hover не срабатывает */
 .js-reveal:not(.is-revealed) {
     pointer-events: none;
 }
 
+/* AOS для текста тоже делаем заметнее */
 [data-aos="fade-up"] {
-    transform: translate3d(0, 12px, 0);
+    opacity: 0;
+    transform: translate3d(0, 34px, 0);
 }
 
 [data-aos="fade-up"].aos-animate {
+    opacity: 1;
     transform: translate3d(0, 0, 0);
 }
 
 [data-aos="fade-left"] {
-    transform: translate3d(14px, 0, 0);
+    opacity: 0;
+    transform: translate3d(36px, 0, 0);
 }
 
 [data-aos="fade-left"].aos-animate {
+    opacity: 1;
     transform: translate3d(0, 0, 0);
 }
 
 [data-aos="fade-right"] {
-    transform: translate3d(-14px, 0, 0);
+    opacity: 0;
+    transform: translate3d(-36px, 0, 0);
 }
 
 [data-aos="fade-right"].aos-animate {
+    opacity: 1;
     transform: translate3d(0, 0, 0);
 }
 
 @media (max-width: 768px) {
-    .js-reveal {
-        translate: 0 8px;
-        transition-duration: 620ms;
-    }
 
-    .js-reveal--frame {
-        translate: 0 8px;
+    .js-reveal,
+    .home-counter.js-reveal,
+    .home-service-card.js-reveal,
+    .home-priority-card.js-reveal,
+    .service-feature-card.js-reveal,
+    .service-related-card.js-reveal,
+    .services-question-item.js-reveal,
+    .feature-card.js-reveal,
+    .info-card.js-reveal,
+    .contact-card.js-reveal {
+        translate: 0 28px;
+        scale: 0.98;
+        transition-duration: 760ms;
     }
 
     [data-aos="fade-up"],
     [data-aos="fade-left"],
     [data-aos="fade-right"] {
-        transform: translate3d(0, 8px, 0);
+        transform: translate3d(0, 24px, 0);
     }
 }
 
@@ -1980,6 +2027,7 @@ h3 {
     .js-reveal {
         opacity: 1;
         translate: 0 0;
+        scale: 1;
         transition: none;
     }
 }
