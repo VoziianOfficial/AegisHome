@@ -96,6 +96,7 @@ window.AegisHome = window.AegisHome || {};
             '.contact-counter',
             '.contact-secure__photo',
             '.contact-secure__line',
+            '.service-compare__column',
         ].join(',');
 
         qsa(blockedAOSSelectors).forEach((element) => {
@@ -666,6 +667,7 @@ window.AegisHome = window.AegisHome || {};
             '.contact-counter',
             '.contact-secure__photo',
             '.contact-secure__line',
+            '.service-compare__column',
         ].join(',');
 
         const revealItems = qsa(revealSelectors);
