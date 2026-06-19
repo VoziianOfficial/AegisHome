@@ -45,6 +45,187 @@ window.AegisHome = window.AegisHome || {};
     const qs = (selector, scope = document) => scope.querySelector(selector);
     const qsa = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 
+    function getConfigValue(path, fallback = '') {
+        const config = window.AEGIS_SITE_CONFIG;
+
+        if (!config || !path) return fallback;
+
+        return path.split('.').reduce((current, key) => {
+            if (current && Object.prototype.hasOwnProperty.call(current, key)) {
+                return current[key];
+            }
+
+            return undefined;
+        }, config) ?? fallback;
+    }
+
+    function setDerivedConfigValues() {
+        const config = window.AEGIS_SITE_CONFIG;
+
+        if (!config || !config.contact) return;
+
+        const phoneRaw = config.contact.phoneRaw || '';
+        const email = config.contact.email || '';
+
+        config.contact.phoneHref = `tel:${phoneRaw.replace(/[^\d+]/g, '')}`;
+        config.contact.emailHref = `mailto:${email}`;
+    }
+
+    function replaceConfigTokens(value) {
+        if (typeof value !== 'string' || !value.includes('{{')) return value;
+
+        return value.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (match, path) => {
+            return getConfigValue(path, match);
+        });
+    }
+
+    function replaceLegacyValues(value) {
+        const config = window.AEGIS_SITE_CONFIG;
+
+        if (typeof value !== 'string' || !config || !config.legacyReplacements) {
+            return value;
+        }
+
+        const replacements = Object.entries(config.legacyReplacements)
+            .map(([from, path]) => [from, getConfigValue(path, from)])
+            .sort((a, b) => b[0].length - a[0].length);
+
+        let nextValue = value;
+
+        replacements.forEach(([from, to]) => {
+            if (!from || from === to) return;
+
+            nextValue = nextValue.split(from).join(to);
+        });
+
+        return nextValue;
+    }
+
+    function applyConfigToTextNodes(root = document.body) {
+        if (!root) return;
+
+        const ignoredTags = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'SVG', 'PATH']);
+
+        const walker = document.createTreeWalker(
+            root,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode(node) {
+                    const parent = node.parentElement;
+
+                    if (!parent || ignoredTags.has(parent.tagName)) {
+                        return NodeFilter.FILTER_REJECT;
+                    }
+
+                    if (!node.nodeValue || !node.nodeValue.trim()) {
+                        return NodeFilter.FILTER_REJECT;
+                    }
+
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            }
+        );
+
+        const textNodes = [];
+
+        while (walker.nextNode()) {
+            textNodes.push(walker.currentNode);
+        }
+
+        textNodes.forEach((node) => {
+            const originalValue = node.nodeValue;
+            const tokenValue = replaceConfigTokens(originalValue);
+            const replacedValue = replaceLegacyValues(tokenValue);
+
+            if (replacedValue !== originalValue) {
+                node.nodeValue = replacedValue;
+            }
+        });
+    }
+
+    function applyConfigToAttributes(root = document) {
+        const attributeNames = [
+            'href',
+            'aria-label',
+            'title',
+            'alt',
+            'placeholder',
+            'content',
+            'value'
+        ];
+
+        qsa('*', root).forEach((element) => {
+            attributeNames.forEach((attributeName) => {
+                if (!element.hasAttribute(attributeName)) return;
+
+                const originalValue = element.getAttribute(attributeName);
+                const tokenValue = replaceConfigTokens(originalValue);
+                const replacedValue = replaceLegacyValues(tokenValue);
+
+                if (replacedValue !== originalValue) {
+                    element.setAttribute(attributeName, replacedValue);
+                }
+            });
+        });
+    }
+
+    function applyConfigDataAttributes(root = document) {
+        qsa('[data-config-text]', root).forEach((element) => {
+            const path = element.getAttribute('data-config-text');
+            element.textContent = getConfigValue(path, element.textContent);
+        });
+
+        qsa('[data-config-html]', root).forEach((element) => {
+            const path = element.getAttribute('data-config-html');
+            element.innerHTML = getConfigValue(path, element.innerHTML);
+        });
+
+        qsa('[data-config-attr]', root).forEach((element) => {
+            const configAttributes = element.getAttribute('data-config-attr');
+
+            if (!configAttributes) return;
+
+            configAttributes.split(',').forEach((pair) => {
+                const [attributeName, path] = pair.split(':').map((item) => item.trim());
+
+                if (!attributeName || !path) return;
+
+                element.setAttribute(attributeName, getConfigValue(path, element.getAttribute(attributeName) || ''));
+            });
+        });
+    }
+
+    function applyConfigToLinks(root = document) {
+        const config = window.AEGIS_SITE_CONFIG;
+
+        if (!config) return;
+
+        qsa('a[href^="tel:"]', root).forEach((link) => {
+            link.setAttribute('href', getConfigValue('contact.phoneHref', link.getAttribute('href')));
+
+            if (link.hasAttribute('data-config-phone-button')) {
+                link.textContent = getConfigValue('contact.phoneButtonText', link.textContent);
+            }
+        });
+
+        qsa('a[href^="mailto:"]', root).forEach((link) => {
+            link.setAttribute('href', getConfigValue('contact.emailHref', link.getAttribute('href')));
+
+            if (link.hasAttribute('data-config-email-text')) {
+                link.textContent = getConfigValue('contact.email', link.textContent);
+            }
+        });
+    }
+
+    function initSiteConfig(root = document) {
+        if (!window.AEGIS_SITE_CONFIG) return;
+
+        setDerivedConfigValues();
+        applyConfigDataAttributes(root);
+        applyConfigToLinks(root);
+        applyConfigToAttributes(root);
+        applyConfigToTextNodes(document.body);
+    }
     function safeCreateIcons() {
         if (window.lucide && typeof window.lucide.createIcons === 'function') {
             window.lucide.createIcons();
@@ -716,6 +897,7 @@ window.AegisHome = window.AegisHome || {};
     }
 
     function initGlobal() {
+        initSiteConfig();
         safeCreateIcons();
         initRevealAnimations();
         initAOS();
@@ -733,6 +915,7 @@ window.AegisHome = window.AegisHome || {};
     }
 
     window.AegisHome.safeCreateIcons = safeCreateIcons;
+    window.AegisHome.initSiteConfig = initSiteConfig;
     window.AegisHome.initAccordions = initAccordions;
     window.AegisHome.initCounters = initCounters;
     window.AegisHome.animateCounter = animateCounter;
