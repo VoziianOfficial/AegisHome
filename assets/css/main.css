@@ -1991,3 +1991,197 @@ h3 {
         transition: none;
     }
 }
+
+/* =========================
+   FIX RESPONSIVE MEDIA CENTERING
+   home / services / about / service pages
+   ========================= */
+
+@media (max-width: 1180px) {
+
+    .home-split__media,
+    .services-intro__media,
+    .about-overview__media,
+    .about-protection__media,
+    .service-overview__media {
+        width: 100% !important;
+        max-width: 680px !important;
+        margin-inline: auto !important;
+        justify-self: center !important;
+        align-self: center !important;
+        display: grid !important;
+        justify-items: center !important;
+        align-items: center !important;
+        overflow: visible !important;
+    }
+
+    .home-split__image,
+    .services-intro__image,
+    .about-overview__image,
+    .about-protection__image,
+    .service-photo,
+    .service-photo--main,
+    .service-photo--small {
+        width: 100% !important;
+        max-width: 620px !important;
+        margin-inline: auto !important;
+        justify-self: center !important;
+    }
+
+    .home-split__image img,
+    .services-intro__image img,
+    .about-overview__image img,
+    .about-protection__image img,
+    .service-photo img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+
+    /* декоративные рамки больше не вылезают вправо */
+    .home-split__image::before,
+    .services-intro__image::before,
+    .about-overview__image::before,
+    .about-protection__image::before,
+    .service-photo--main::before {
+        inset: 12px 12px -12px -12px !important;
+        border-width: 1px !important;
+    }
+
+    /* floating-блоки тоже центрируем, убираем отрицательный right */
+    .floating-card,
+    .home-split__floating,
+    .services-intro__float,
+    .about-check-card,
+    .about-protection__float,
+    .service-photo-note {
+        right: auto !important;
+        left: auto !important;
+        bottom: auto !important;
+        margin-inline: auto !important;
+        max-width: 520px !important;
+    }
+}
+
+/* tablet: service overview photos перестают быть absolute и становятся аккуратной колонкой */
+@media (max-width: 980px) {
+    .service-overview__media {
+        min-height: 0 !important;
+        display: grid !important;
+        gap: 16px !important;
+    }
+
+    .service-photo,
+    .service-photo--main,
+    .service-photo--small {
+        position: relative !important;
+        inset: auto !important;
+        right: auto !important;
+        left: auto !important;
+        bottom: auto !important;
+        top: auto !important;
+        transform: none !important;
+    }
+
+    .service-photo--main {
+        height: clamp(330px, 54vw, 460px) !important;
+    }
+
+    .service-photo--small {
+        height: clamp(230px, 42vw, 340px) !important;
+        border: 0 !important;
+    }
+
+    .service-photo-note {
+        position: relative !important;
+        width: 100% !important;
+        margin-top: 0 !important;
+        border-radius: 22px !important;
+    }
+
+    .home-split__media,
+    .services-intro__media,
+    .about-overview__media,
+    .about-protection__media,
+    .service-overview__media {
+        max-width: 640px !important;
+    }
+}
+
+/* mobile: фото строго по центру и не шире контейнера */
+@media (max-width: 768px) {
+
+    .home-split__media,
+    .services-intro__media,
+    .about-overview__media,
+    .about-protection__media,
+    .service-overview__media {
+        max-width: 100% !important;
+        width: min(100%, 560px) !important;
+        margin-inline: auto !important;
+        justify-self: center !important;
+        padding-inline: 0 !important;
+    }
+
+    .home-split__image,
+    .services-intro__image,
+    .about-overview__image,
+    .about-protection__image,
+    .service-photo,
+    .service-photo--main,
+    .service-photo--small {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin-inline: auto !important;
+        border-radius: 26px !important;
+    }
+
+    .home-split__image::before,
+    .services-intro__image::before,
+    .about-overview__image::before,
+    .about-protection__image::before,
+    .service-photo--main::before {
+        inset: 10px 10px -8px -8px !important;
+    }
+
+    .floating-card,
+    .home-split__floating,
+    .services-intro__float,
+    .about-check-card,
+    .about-protection__float,
+    .service-photo-note {
+        position: relative !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-top: 14px !important;
+        margin-inline: auto !important;
+        transform: none !important;
+    }
+}
+
+@media (max-width: 560px) {
+
+    .home-split__media,
+    .services-intro__media,
+    .about-overview__media,
+    .about-protection__media,
+    .service-overview__media {
+        width: 100% !important;
+    }
+
+    .home-split__image,
+    .services-intro__image,
+    .about-overview__image,
+    .about-protection__image {
+        min-height: 300px !important;
+        aspect-ratio: 1 / 1 !important;
+    }
+
+    .service-photo--main {
+        height: 300px !important;
+    }
+
+    .service-photo--small {
+        height: 220px !important;
+    }
+}
