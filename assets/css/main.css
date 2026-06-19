@@ -1900,3 +1900,276 @@ h3 {
         width: 100%;
     }
 }
+
+/* =========================
+   GLOBAL AOS STABILITY FIX
+   ========================= */
+
+/*
+   Важно:
+   карточки и фото-карточки больше не появляются через transform.
+   Это убирает дерганье, потому что hover transform больше не конфликтует с AOS transform.
+*/
+
+[data-aos] {
+    backface-visibility: hidden;
+}
+
+[data-aos="aegis-card-reveal"] {
+    opacity: 0;
+    transform: none !important;
+    clip-path: inset(0 0 16% 0 round 24px);
+    transition-property: opacity, clip-path !important;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+[data-aos="aegis-card-reveal"].aos-animate {
+    opacity: 1;
+    transform: none !important;
+    clip-path: inset(0 0 0 0 round 24px);
+}
+
+[data-aos="aegis-photo-reveal"] {
+    opacity: 0;
+    transform: none !important;
+    clip-path: inset(8% 8% 8% 8% round 28px);
+    transition-property: opacity, clip-path !important;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+[data-aos="aegis-photo-reveal"].aos-animate {
+    opacity: 1;
+    transform: none !important;
+    clip-path: inset(0 0 0 0 round 28px);
+}
+
+[data-aos="aegis-frame-reveal"] {
+    opacity: 0;
+    transform: none !important;
+    clip-path: inset(0 100% 0 0);
+    transition-property: opacity, clip-path !important;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+[data-aos="aegis-frame-reveal"].aos-animate {
+    opacity: 1;
+    transform: none !important;
+    clip-path: inset(0 0 0 0);
+}
+
+[data-aos="aegis-soft-reveal"] {
+    opacity: 0;
+    transform: none !important;
+    transition-property: opacity !important;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+[data-aos="aegis-soft-reveal"].aos-animate {
+    opacity: 1;
+    transform: none !important;
+}
+
+/* Текстовые элементы могут спокойно двигаться */
+[data-aos="fade-up"] {
+    transform: translate3d(0, 22px, 0);
+}
+
+[data-aos="fade-up"].aos-animate {
+    transform: translate3d(0, 0, 0);
+}
+
+[data-aos="fade-left"] {
+    transform: translate3d(24px, 0, 0);
+}
+
+[data-aos="fade-left"].aos-animate {
+    transform: translate3d(0, 0, 0);
+}
+
+[data-aos="fade-right"] {
+    transform: translate3d(-24px, 0, 0);
+}
+
+[data-aos="fade-right"].aos-animate {
+    transform: translate3d(0, 0, 0);
+}
+
+/* Чтобы AOS не ломал hover на карточках */
+.home-counter[data-aos],
+.home-service-card[data-aos],
+.home-priority-card[data-aos],
+.service-feature-card[data-aos],
+.service-related-card[data-aos],
+.legal-card[data-aos],
+.feature-card[data-aos],
+.info-card[data-aos],
+.contact-card[data-aos] {
+    will-change: opacity, clip-path;
+}
+
+/* На hover работает только твой обычный hover, без AOS-конфликта */
+.home-counter.aos-animate,
+.home-service-card.aos-animate,
+.home-priority-card.aos-animate,
+.service-feature-card.aos-animate,
+.service-related-card.aos-animate,
+.legal-card.aos-animate,
+.feature-card.aos-animate,
+.info-card.aos-animate,
+.contact-card.aos-animate {
+    will-change: auto;
+}
+
+/* Мобильная версия — ещё спокойнее */
+@media (max-width: 768px) {
+    [data-aos="aegis-card-reveal"] {
+        clip-path: inset(0 0 10% 0 round 22px);
+    }
+
+    [data-aos="aegis-photo-reveal"] {
+        clip-path: inset(5% 5% 5% 5% round 22px);
+    }
+
+    [data-aos="fade-up"],
+    [data-aos="fade-left"],
+    [data-aos="fade-right"] {
+        transform: translate3d(0, 16px, 0);
+    }
+}
+
+
+/* =========================
+   GLOBAL AOS STABILITY FIX
+   ========================= */
+
+/*
+   Важно:
+   карточки и фото-карточки больше не появляются через transform.
+   Это убирает дерганье, потому что hover transform больше не конфликтует с AOS transform.
+*/
+
+[data-aos] {
+    backface-visibility: hidden;
+}
+
+[data-aos="aegis-card-reveal"] {
+    opacity: 0;
+    transform: none !important;
+    clip-path: inset(0 0 16% 0 round 24px);
+    transition-property: opacity, clip-path !important;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+[data-aos="aegis-card-reveal"].aos-animate {
+    opacity: 1;
+    transform: none !important;
+    clip-path: inset(0 0 0 0 round 24px);
+}
+
+[data-aos="aegis-photo-reveal"] {
+    opacity: 0;
+    transform: none !important;
+    clip-path: inset(8% 8% 8% 8% round 28px);
+    transition-property: opacity, clip-path !important;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+[data-aos="aegis-photo-reveal"].aos-animate {
+    opacity: 1;
+    transform: none !important;
+    clip-path: inset(0 0 0 0 round 28px);
+}
+
+[data-aos="aegis-frame-reveal"] {
+    opacity: 0;
+    transform: none !important;
+    clip-path: inset(0 100% 0 0);
+    transition-property: opacity, clip-path !important;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+[data-aos="aegis-frame-reveal"].aos-animate {
+    opacity: 1;
+    transform: none !important;
+    clip-path: inset(0 0 0 0);
+}
+
+[data-aos="aegis-soft-reveal"] {
+    opacity: 0;
+    transform: none !important;
+    transition-property: opacity !important;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+[data-aos="aegis-soft-reveal"].aos-animate {
+    opacity: 1;
+    transform: none !important;
+}
+
+/* Текстовые элементы могут спокойно двигаться */
+[data-aos="fade-up"] {
+    transform: translate3d(0, 22px, 0);
+}
+
+[data-aos="fade-up"].aos-animate {
+    transform: translate3d(0, 0, 0);
+}
+
+[data-aos="fade-left"] {
+    transform: translate3d(24px, 0, 0);
+}
+
+[data-aos="fade-left"].aos-animate {
+    transform: translate3d(0, 0, 0);
+}
+
+[data-aos="fade-right"] {
+    transform: translate3d(-24px, 0, 0);
+}
+
+[data-aos="fade-right"].aos-animate {
+    transform: translate3d(0, 0, 0);
+}
+
+/* Чтобы AOS не ломал hover на карточках */
+.home-counter[data-aos],
+.home-service-card[data-aos],
+.home-priority-card[data-aos],
+.service-feature-card[data-aos],
+.service-related-card[data-aos],
+.legal-card[data-aos],
+.feature-card[data-aos],
+.info-card[data-aos],
+.contact-card[data-aos] {
+    will-change: opacity, clip-path;
+}
+
+/* На hover работает только твой обычный hover, без AOS-конфликта */
+.home-counter.aos-animate,
+.home-service-card.aos-animate,
+.home-priority-card.aos-animate,
+.service-feature-card.aos-animate,
+.service-related-card.aos-animate,
+.legal-card.aos-animate,
+.feature-card.aos-animate,
+.info-card.aos-animate,
+.contact-card.aos-animate {
+    will-change: auto;
+}
+
+/* Мобильная версия — ещё спокойнее */
+@media (max-width: 768px) {
+    [data-aos="aegis-card-reveal"] {
+        clip-path: inset(0 0 10% 0 round 22px);
+    }
+
+    [data-aos="aegis-photo-reveal"] {
+        clip-path: inset(5% 5% 5% 5% round 22px);
+    }
+
+    [data-aos="fade-up"],
+    [data-aos="fade-left"],
+    [data-aos="fade-right"] {
+        transform: translate3d(0, 16px, 0);
+    }
+}

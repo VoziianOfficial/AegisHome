@@ -251,15 +251,30 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     width: 100%;
+    gap: 0;
 }
 
 .services-gallery__card {
+    display: block;
     position: relative;
     min-height: clamp(330px, 35vw, 470px);
     overflow: hidden;
+    margin: 0;
+    border-radius: 0;
     color: var(--color-white);
     background: var(--color-graphite);
     isolation: isolate;
+}
+
+.services-gallery__card[data-aos="aegis-soft-reveal"] {
+    clip-path: none !important;
+    transform: none !important;
+    border-radius: 0;
+}
+
+.services-gallery__card[data-aos="aegis-soft-reveal"].aos-animate {
+    clip-path: none !important;
+    transform: none !important;
 }
 
 .services-gallery__card img {
