@@ -143,10 +143,21 @@
 
 .services-intro__media {
     position: relative;
+    align-self: stretch;
+    display: grid;
+    align-content: stretch;
 }
 
 .services-intro__image {
+    width: 100%;
+    height: 100%;
     min-height: clamp(360px, 40vw, 520px);
+    aspect-ratio: 4 / 5;
+}
+
+.services-intro__image img {
+    min-height: 0;
+    height: 100%;
 }
 
 .services-intro__image::before {
@@ -1229,6 +1240,10 @@
         border-radius: 26px;
     }
 
+    .services-intro__image {
+        aspect-ratio: 1 / 1.08;
+    }
+
     .about-overview__image,
     .about-protection__image {
         aspect-ratio: 1 / 1.08;
@@ -1326,6 +1341,10 @@
     .services-intro__play {
         width: 48px;
         height: 48px;
+    }
+
+    .services-intro__image {
+        aspect-ratio: 1 / 1;
     }
 
     .about-overview__image,
@@ -2880,4 +2899,3 @@
         aspect-ratio: 4 / 5;
     }
 }
-
