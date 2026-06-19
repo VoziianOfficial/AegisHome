@@ -2899,3 +2899,51 @@
         aspect-ratio: 4 / 5;
     }
 }
+/* =========================
+   SERVICES ICON STRIP MOBILE/TABLET
+   one horizontal row
+   ========================= */
+
+@media (max-width: 1024px) {
+    .services-icon-strip {
+        overflow: hidden;
+    }
+
+    .services-icon-strip__track {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 12px;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 0 16px 14px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .services-icon-strip__item {
+        flex: 0 0 clamp(118px, 21vw, 156px);
+        min-width: clamp(118px, 21vw, 156px);
+        scroll-snap-align: start;
+        white-space: nowrap;
+    }
+
+    .services-icon-strip__item i,
+    .services-icon-strip__item svg {
+        flex: 0 0 auto;
+    }
+}
+
+@media (max-width: 560px) {
+    .services-icon-strip__track {
+        gap: 10px;
+        padding-inline: 14px;
+    }
+
+    .services-icon-strip__item {
+        flex-basis: 118px;
+        min-width: 118px;
+    }
+}
