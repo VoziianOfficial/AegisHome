@@ -472,3 +472,180 @@
         padding: 26px;
     }
 }
+
+/* =========================
+   FINAL LEGAL PAGES FIX
+   stronger selectors + correct card layout
+   ========================= */
+
+/* legal cards: marker слева, весь текст справа */
+.legal-page .legal-card {
+    grid-template-columns: 28px minmax(0, 1fr);
+    align-items: start;
+}
+
+.legal-page .legal-card__marker {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+}
+
+.legal-page .legal-card h3,
+.legal-page .legal-card p,
+.legal-page .legal-card__links,
+.legal-page .legal-inline-link {
+    grid-column: 2;
+}
+
+/* Lucide после загрузки превращает i в svg — страхуем все legal icons */
+.legal-page .legal-hero__meta i,
+.legal-page .legal-hero__meta svg,
+.legal-page .legal-side-panel>i,
+.legal-page .legal-side-panel>svg,
+.legal-page .legal-inline-link i,
+.legal-page .legal-inline-link svg,
+.legal-page .legal-contact__actions i,
+.legal-page .legal-contact__actions svg {
+    flex: 0 0 auto;
+}
+
+/* legal hero */
+.legal-page .legal-hero {
+    background-size: cover;
+    background-position: center;
+}
+
+.legal-page .legal-hero__frame {
+    position: relative;
+    z-index: 2;
+}
+
+/* legal side panel icon */
+.legal-page .legal-side-panel>i,
+.legal-page .legal-side-panel>svg {
+    display: block;
+    width: clamp(36px, 5vw, 52px);
+    height: clamp(36px, 5vw, 52px);
+    margin-bottom: 34px;
+    color: var(--color-lime);
+    filter: drop-shadow(0 0 18px rgba(140, 255, 63, 0.24));
+}
+
+/* legal contact сделать реально темной/дорогой секцией */
+.legal-page .legal-contact {
+    position: relative;
+    padding: clamp(48px, 6vw, 76px) 0;
+    color: var(--color-white);
+    background: #050607;
+    overflow: hidden;
+}
+
+.legal-page .legal-contact::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg,
+            rgba(255, 255, 255, 0.045),
+            transparent 18%,
+            transparent 82%,
+            rgba(255, 255, 255, 0.04));
+    pointer-events: none;
+}
+
+.legal-page .legal-contact::after {
+    content: "";
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    pointer-events: none;
+}
+
+.legal-page .legal-contact__card {
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+    min-height: 250px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.032)),
+        #0b0d0f;
+    box-shadow:
+        0 34px 90px rgba(0, 0, 0, 0.52),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    transition:
+        translate var(--transition-main),
+        border-color var(--transition-main),
+        box-shadow var(--transition-main);
+}
+
+.legal-page .legal-contact__card:hover {
+    translate: 0 -5px;
+    border-color: rgba(255, 255, 255, 0.24);
+    box-shadow:
+        0 44px 110px rgba(0, 0, 0, 0.62),
+        0 0 40px rgba(255, 255, 255, 0.055),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.legal-page .legal-contact__card h2 {
+    color: var(--color-white);
+}
+
+.legal-page .legal-contact__card p {
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.legal-page .legal-contact .section-kicker {
+    color: var(--color-yellow);
+}
+
+/* кнопки внутри legal CTA */
+.legal-page .legal-contact .btn--primary {
+    background: var(--color-lime);
+    box-shadow:
+        0 18px 44px rgba(140, 255, 63, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.legal-page .legal-contact .btn--secondary {
+    border-color: rgba(255, 255, 255, 0.18);
+    color: var(--color-white);
+    background: rgba(255, 255, 255, 0.075);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.legal-page .legal-contact .btn--secondary:hover {
+    color: var(--color-graphite);
+    border-color: var(--color-yellow);
+    background: var(--color-yellow);
+}
+
+/* mobile legal cards */
+@media (max-width: 768px) {
+    .legal-page .legal-card {
+        grid-template-columns: 1fr;
+    }
+
+    .legal-page .legal-card__marker,
+    .legal-page .legal-card h3,
+    .legal-page .legal-card p,
+    .legal-page .legal-card__links,
+    .legal-page .legal-inline-link {
+        grid-column: 1;
+    }
+
+    .legal-page .legal-card__marker {
+        grid-row: auto;
+    }
+
+    .legal-page .legal-contact__card {
+        min-height: 0;
+        border-radius: 26px;
+    }
+}
