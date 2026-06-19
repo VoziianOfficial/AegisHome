@@ -51,202 +51,150 @@ window.AegisHome = window.AegisHome || {};
         }
     }
 
-    function getAOSNumber(element, attributeName) {
-        if (!element || !element.hasAttribute(attributeName)) return null;
 
-        const value = Number(element.getAttribute(attributeName));
-        return Number.isFinite(value) ? value : null;
-    }
+    function initAOS() {
+        if (!window.AOS || prefersReducedMotion) return;
 
-    function setAOS(element, animation = 'fade-up', delay = null, duration = null) {
-        if (!element) return;
 
-        element.setAttribute('data-aos', animation);
-
-        const resolvedDelay = delay ?? getAOSNumber(element, 'data-aos-delay');
-        const resolvedDuration = duration ?? getAOSNumber(element, 'data-aos-duration');
-
-        if (Number.isFinite(resolvedDelay) && resolvedDelay > 0) {
-            element.setAttribute('data-aos-delay', String(resolvedDelay));
-        } else {
-            element.removeAttribute('data-aos-delay');
-        }
-
-        if (Number.isFinite(resolvedDuration) && resolvedDuration > 0) {
-            element.setAttribute('data-aos-duration', String(resolvedDuration));
-        } else {
-            element.removeAttribute('data-aos-duration');
-        }
-    }
-
-    function initAOSMarkup() {
-        const cardSelectors = [
+        const blockedAOSSelectors = [
             '.home-counter',
-            '.contact-counter',
             '.home-service-card',
             '.home-priority-card',
-            '.service-feature-card',
-            '.service-related-card',
-            '.legal-card',
             '.feature-card',
             '.info-card',
             '.contact-card',
-            '.home-contact__card',
-            '.legal-contact__card',
-            '.services-cta__card',
+            '.service-feature-card',
+            '.service-related-card',
+            '.service-photo',
             '.service-photo-note',
-            '.about-check-card',
-            '.floating-card',
-            '.services-intro__float',
-            '.services-icon-strip__item'
-        ].join(',');
-
-        const photoSelectors = [
             '.image-panel',
-            '.service-photo'
-        ].join(',');
-
-        const frameSelectors = [
-            '.hero-frame'
-        ].join(',');
-
-        const softSelectors = [
-            '.marquee',
-            '.service-marquee',
+            '.floating-card',
+            '.accordion',
+            '.accordion-item',
+            '.legal-card',
+            '.legal-side-panel',
+            '.legal-contact__card',
+            '.form-panel',
+            '.contact-main__form',
+            '.services-gallery',
+            '.services-gallery a',
+            '.services-gallery__card',
             '.service-overview__media',
             '.about-overview__media',
             '.about-protection__media',
             '.services-intro__media',
             '.home-split__media',
             '.home-priorities__preview',
-            '.about-reviews__slider',
-            '.section-heading',
-            '.service-features__top',
-            '.service-related__heading',
-            '.legal-content__head',
-            '.service-overview__content',
-            '.legal-overview__content',
-            '.service-faq__content',
-            '.contact-main__content',
-            '.contact-faq__content',
-            '.services-intro__content',
-            '.home-split__content',
-            '.about-overview__content',
-            '.about-protection__content',
-            '.about-reviews__content',
-            '.home-priorities__content'
+            '.about-reviews__slider'
         ].join(',');
 
-        const applyTextSequence = (container, options = {}) => {
-            if (!container) return;
+        qsa(blockedAOSSelectors).forEach((element) => {
+            element.removeAttribute('data-aos');
+            element.removeAttribute('data-aos-delay');
+            element.removeAttribute('data-aos-duration');
+            element.removeAttribute('data-aos-easing');
+            element.removeAttribute('data-aos-anchor-placement');
+        });
 
-            const {
-                kickerDelay = 0,
-                titleDelay = 80,
-                textDelay = 140,
-                textStep = 55,
-                listDelay = 250,
-                buttonsDelay = 320,
-                noteDelay = 260
-            } = options;
+        qsa('.hero-frame').forEach((frame) => {
+            frame.removeAttribute('data-aos');
+            frame.removeAttribute('data-aos-delay');
 
-            const kicker = container.querySelector('.section-kicker');
-            const title = container.querySelector('h1, h2');
-            const paragraphs = Array.from(container.querySelectorAll('p:not(.section-kicker)'));
-            const list = container.querySelector('ul, ol');
-            const buttons = container.querySelector('.btn-row');
-            const note = container.querySelector('.about-reviews__note, .contact-platform-note');
+            const kicker = qs('.section-kicker', frame);
+            const title = qs('h1', frame);
+            const text = qs('p:not(.section-kicker)', frame);
+            const buttons = qs('.btn-row', frame);
 
-            setAOS(kicker, 'fade-up', kickerDelay, 600);
-            setAOS(title, 'fade-up', titleDelay, 660);
+            if (kicker) {
+                kicker.setAttribute('data-aos', 'fade-up');
+                kicker.setAttribute('data-aos-delay', '80');
+            }
+
+            if (title) {
+                title.setAttribute('data-aos', 'fade-up');
+                title.setAttribute('data-aos-delay', '140');
+            }
+
+            if (text) {
+                text.setAttribute('data-aos', 'fade-up');
+                text.setAttribute('data-aos-delay', '200');
+            }
+
+            if (buttons) {
+                buttons.setAttribute('data-aos', 'fade-up');
+                buttons.setAttribute('data-aos-delay', '260');
+            }
+        });
+
+        qsa('.section-heading, .service-features__top, .service-related__heading, .legal-content__head').forEach((group) => {
+            const kicker = qs('.section-kicker', group);
+            const title = qs('h1, h2', group);
+            const text = qs('p:not(.section-kicker)', group);
+
+            if (kicker) {
+                kicker.setAttribute('data-aos', 'fade-up');
+                kicker.setAttribute('data-aos-delay', '0');
+            }
+
+            if (title) {
+                title.setAttribute('data-aos', 'fade-up');
+                title.setAttribute('data-aos-delay', '70');
+            }
+
+            if (text) {
+                text.setAttribute('data-aos', 'fade-up');
+                text.setAttribute('data-aos-delay', '130');
+            }
+        });
+
+        qsa('.service-overview__content, .legal-overview__content, .service-faq__content, .contact-main__content, .contact-faq__content, .services-intro__content, .home-split__content, .about-overview__content, .about-protection__content, .home-priorities__content').forEach((content) => {
+            const kicker = qs('.section-kicker', content);
+            const title = qs('h2', content);
+            const paragraphs = qsa('p:not(.section-kicker)', content);
+            const list = qs('ul, ol', content);
+            const buttons = qs('.btn-row', content);
+
+            if (kicker) {
+                kicker.setAttribute('data-aos', 'fade-up');
+                kicker.setAttribute('data-aos-delay', '0');
+            }
+
+            if (title) {
+                title.setAttribute('data-aos', 'fade-up');
+                title.setAttribute('data-aos-delay', '70');
+            }
 
             paragraphs.forEach((paragraph, index) => {
-                setAOS(paragraph, 'fade-up', textDelay + index * textStep, 660);
+                paragraph.setAttribute('data-aos', 'fade-up');
+                paragraph.setAttribute('data-aos-delay', String(130 + index * 45));
             });
 
-            setAOS(list, 'fade-up', listDelay, 660);
-            setAOS(buttons, 'fade-up', buttonsDelay, 660);
-            setAOS(note, 'fade-up', noteDelay, 620);
-        };
+            if (list) {
+                list.setAttribute('data-aos', 'fade-up');
+                list.setAttribute('data-aos-delay', '230');
+            }
 
-        document.querySelectorAll(cardSelectors).forEach((card) => {
-            setAOS(card, 'aegis-card-reveal', null, 620);
+            if (buttons) {
+                buttons.setAttribute('data-aos', 'fade-up');
+                buttons.setAttribute('data-aos-delay', '280');
+            }
         });
-
-        document.querySelectorAll('.services-gallery__card').forEach((card) => {
-            setAOS(card, 'aegis-soft-reveal', null, 620);
-        });
-
-        document.querySelectorAll(photoSelectors).forEach((photo) => {
-            setAOS(photo, 'aegis-photo-reveal', null, 700);
-        });
-
-        document.querySelectorAll(frameSelectors).forEach((frame) => {
-            setAOS(frame, 'aegis-frame-reveal', null, 720);
-            applyTextSequence(frame, {
-                kickerDelay: 90,
-                titleDelay: 160,
-                textDelay: 230,
-                listDelay: 300,
-                buttonsDelay: 300
-            });
-        });
-
-        document.querySelectorAll(softSelectors).forEach((element) => {
-            setAOS(element, 'aegis-soft-reveal', null, 620);
-        });
-
-        document.querySelectorAll('.section-heading, .service-features__top, .service-related__heading, .legal-content__head').forEach((group) => {
-            applyTextSequence(group, {
-                textDelay: 150,
-                listDelay: 210,
-                buttonsDelay: 240
-            });
-        });
-
-        document.querySelectorAll('.service-overview__content, .legal-overview__content, .service-faq__content, .contact-main__content, .contact-faq__content, .services-intro__content, .home-split__content, .about-overview__content, .about-protection__content, .about-reviews__content, .home-priorities__content').forEach((content) => {
-            applyTextSequence(content);
-        });
-
-        document.querySelectorAll('.accordion').forEach((accordion) => {
-            accordion.querySelectorAll('.accordion-item').forEach((item, index) => {
-                setAOS(item, 'aegis-card-reveal', Math.min(index * 55, 260), 600);
-            });
-        });
-
-        document.querySelectorAll('.form-panel, .contact-main__form, form').forEach((form) => {
-            const formDelay = getAOSNumber(form, 'data-aos-delay');
-            setAOS(form, 'aegis-card-reveal', formDelay ?? 120, 680);
-        });
-    }
-
-    function initAOS() {
-        if (!window.AOS || prefersReducedMotion) return;
-
-        initAOSMarkup();
 
         window.AOS.init({
-            duration: 660,
+            duration: 620,
             easing: 'ease-out-cubic',
             once: true,
-            offset: 65,
+            offset: 55,
             delay: 0,
             mirror: false,
             anchorPlacement: 'top-bottom'
         });
 
-        const refreshAOS = () => {
+        window.addEventListener('load', () => {
             window.setTimeout(() => {
                 window.AOS.refreshHard();
-            }, 180);
-        };
-
-        if (document.readyState === 'complete') {
-            refreshAOS();
-            return;
-        }
-
-        window.addEventListener('load', refreshAOS, { once: true });
+            }, 220);
+        });
     }
 
     function initHeaderState() {
@@ -668,8 +616,86 @@ window.AegisHome = window.AegisHome || {};
         });
     }
 
+    function initRevealAnimations() {
+        const revealSelectors = [
+            '.hero-frame',
+            '.home-counter',
+            '.home-service-card',
+            '.home-priority-card',
+            '.feature-card',
+            '.info-card',
+            '.contact-card',
+            '.service-feature-card',
+            '.service-related-card',
+            '.service-photo',
+            '.service-photo-note',
+            '.image-panel',
+            '.floating-card',
+            '.accordion-item',
+            '.legal-card',
+            '.legal-side-panel',
+            '.legal-contact__card',
+            '.form-panel',
+            '.contact-main__form',
+            '.services-gallery a',
+            '.services-gallery__card',
+            '.service-overview__media',
+            '.about-overview__media',
+            '.about-protection__media',
+            '.services-intro__media',
+            '.home-split__media',
+            '.home-priorities__preview',
+            '.about-reviews__slider'
+        ].join(',');
+
+        const revealItems = qsa(revealSelectors);
+
+        if (!revealItems.length) return;
+
+        revealItems.forEach((item, index) => {
+            item.classList.add('js-reveal');
+
+            if (item.classList.contains('hero-frame')) {
+                item.classList.add('js-reveal--frame');
+                item.style.setProperty('--reveal-delay', '0ms');
+                return;
+            }
+
+            const delay = Math.min((index % 3) * 45, 90);
+            item.style.setProperty('--reveal-delay', `${delay}ms`);
+        });
+
+        if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+            revealItems.forEach((item) => {
+                item.classList.add('is-revealed');
+            });
+
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries, currentObserver) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+
+                    entry.target.classList.add('is-revealed');
+                    currentObserver.unobserve(entry.target);
+                });
+            },
+            {
+                threshold: 0.08,
+                rootMargin: '0px 0px -6% 0px'
+            }
+        );
+
+        revealItems.forEach((item) => {
+            observer.observe(item);
+        });
+    }
+
     function initGlobal() {
         safeCreateIcons();
+        initRevealAnimations();
         initAOS();
         initHeaderState();
         initMobileMenu();
