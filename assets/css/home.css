@@ -1814,3 +1814,113 @@
         margin-top: 4px;
     }
 }
+
+
+/* =========================
+   HOME ICON MARQUEE
+   ========================= */
+
+.home-icon-marquee {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(26px, 4vw, 42px) 0;
+    color: var(--color-white);
+    background:
+        radial-gradient(circle at 18% 50%, rgba(140, 255, 63, 0.16), transparent 26%),
+        radial-gradient(circle at 82% 50%, rgba(255, 216, 77, 0.13), transparent 24%),
+        linear-gradient(135deg, #101214 0%, #171a1d 52%, #101214 100%);
+}
+
+.home-icon-marquee::before,
+.home-icon-marquee::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    width: clamp(70px, 12vw, 180px);
+    pointer-events: none;
+}
+
+.home-icon-marquee::before {
+    left: 0;
+    background: linear-gradient(90deg, #101214, transparent);
+}
+
+.home-icon-marquee::after {
+    right: 0;
+    background: linear-gradient(270deg, #101214, transparent);
+}
+
+.home-icon-marquee__track {
+    display: flex;
+    width: max-content;
+    animation: homeIconMarquee 28s linear infinite;
+}
+
+.home-icon-marquee:hover .home-icon-marquee__track {
+    animation-duration: 42s;
+}
+
+.home-icon-marquee__group {
+    display: flex;
+    align-items: center;
+    gap: clamp(34px, 5vw, 76px);
+    padding-right: clamp(34px, 5vw, 76px);
+}
+
+.home-icon-marquee__group svg {
+    width: clamp(54px, 7vw, 92px);
+    height: clamp(54px, 7vw, 92px);
+    color: rgba(255, 255, 255, 0.84);
+    stroke-width: 1.35;
+    transition:
+        color var(--transition-main),
+        transform var(--transition-main),
+        filter var(--transition-main);
+}
+
+.home-icon-marquee__group svg:nth-child(2n) {
+    color: rgba(140, 255, 63, 0.88);
+}
+
+.home-icon-marquee__group svg:nth-child(3n) {
+    color: rgba(255, 216, 77, 0.86);
+}
+
+.home-icon-marquee__group svg:hover {
+    color: var(--color-lime);
+    transform: translateY(-6px) rotate(6deg) scale(1.06);
+    filter: drop-shadow(0 0 18px rgba(140, 255, 63, 0.34));
+}
+
+@keyframes homeIconMarquee {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 768px) {
+    .home-icon-marquee {
+        padding: 24px 0;
+    }
+
+    .home-icon-marquee__track {
+        animation-duration: 22s;
+    }
+
+    .home-icon-marquee__group {
+        gap: 30px;
+        padding-right: 30px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .home-icon-marquee__track {
+        animation: none;
+    }
+}
