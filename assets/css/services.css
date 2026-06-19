@@ -637,3 +637,119 @@
         flex-direction: column;
     }
 }
+
+/* =========================
+   FIX RELATED SERVICES OVERFLOW
+   cards must not overlap next section
+   ========================= */
+
+.service-related {
+    position: relative;
+    overflow: clip;
+    padding-bottom: clamp(42px, 5vw, 76px);
+    background: var(--color-milk);
+}
+
+@supports not (overflow: clip) {
+    .service-related {
+        overflow: hidden;
+    }
+}
+
+.service-related__grid {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    isolation: isolate;
+}
+
+.service-related-card {
+    display: block;
+    position: relative;
+    z-index: 1;
+    contain: paint;
+    transform: translateZ(0);
+}
+
+/* reveal для этих карточек делаем спокойнее, чтобы они не вылезали вниз */
+.service-related-card.js-reveal {
+    opacity: 0;
+    translate: 0 28px !important;
+    scale: 1 !important;
+    transform: translateZ(0) !important;
+    transition:
+        opacity 760ms cubic-bezier(0.16, 1, 0.3, 1),
+        translate 760ms cubic-bezier(0.16, 1, 0.3, 1),
+        border-color var(--transition-main),
+        box-shadow var(--transition-main) !important;
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.service-related-card.js-reveal.is-revealed {
+    opacity: 1;
+    translate: 0 0 !important;
+    scale: 1 !important;
+    transform: translateZ(0) !important;
+}
+
+/* на hover двигаем только фото/иконку, не всю карточку */
+.service-related-card:hover {
+    translate: 0 0 !important;
+    transform: translateZ(0) !important;
+}
+
+/* чуть уменьшаем zoom фото, чтобы не было визуального распирания */
+.service-related-card:hover img {
+    transform: scale(1.055);
+}
+
+/* =========================
+   FIX RELATED SERVICES SPACING
+   add gaps between cards + safe bottom
+   ========================= */
+
+.service-related {
+    padding-bottom: clamp(48px, 6vw, 84px);
+}
+
+.service-related__grid {
+    width: min(100% - 40px, var(--container-wide));
+    margin-inline: auto;
+    gap: clamp(16px, 2.2vw, 26px);
+}
+
+.service-related-card {
+    border-radius: 30px;
+    min-height: clamp(320px, 31vw, 430px);
+}
+
+.service-related-card img,
+.service-related-card__overlay {
+    border-radius: inherit;
+}
+
+@media (max-width: 980px) {
+    .service-related__grid {
+        width: min(100% - 28px, var(--container));
+        gap: 18px;
+    }
+
+    .service-related-card {
+        border-radius: 26px;
+    }
+}
+
+@media (max-width: 560px) {
+    .service-related {
+        padding-bottom: 54px;
+    }
+
+    .service-related__grid {
+        gap: 16px;
+    }
+
+    .service-related-card {
+        min-height: 285px;
+        border-radius: 24px;
+    }
+}
