@@ -92,6 +92,10 @@ window.AegisHome = window.AegisHome || {};
             '.services-questions__note',
             '.home-question-answer',
             '.home-questions__note',
+            '.services-strip__item',
+            '.contact-counter',
+            '.contact-secure__photo',
+            '.contact-secure__line',
         ].join(',');
 
         qsa(blockedAOSSelectors).forEach((element) => {
@@ -658,6 +662,10 @@ window.AegisHome = window.AegisHome || {};
             '.services-questions__note',
             '.home-question-answer',
             '.home-questions__note',
+            '.services-strip__item',
+            '.contact-counter',
+            '.contact-secure__photo',
+            '.contact-secure__line',
         ].join(',');
 
         const revealItems = qsa(revealSelectors);

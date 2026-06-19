@@ -256,51 +256,67 @@
                 </div>
             </section>
 
-            <section class="contact-counters" id="contact-counters" aria-label="Contact page platform highlights">
-                <div class="container">
-                    <div class="contact-counters__grid">
-                        <article class="contact-counter" data-aos="fade-up">
-                            <div class="contact-counter__value">
-                                <span data-counter-target="1">0</span>
-                                <small>Request</small>
-                            </div>
+<section class="contact-counters" id="contact-counters" aria-label="Contact page platform highlights">
+    <div class="container-wide">
+        <div class="contact-counters__grid">
+            <article class="contact-counter">
+                <i class="contact-counter__icon" data-lucide="clipboard-list" aria-hidden="true"></i>
 
-                            <h2>Simple Start</h2>
-                            <p>One clear form to begin comparing security service options.</p>
-                        </article>
-
-                        <article class="contact-counter" data-aos="fade-up" data-aos-delay="80">
-                            <div class="contact-counter__value">
-                                <span data-counter-target="6">0</span>
-                                <small>Services</small>
-                            </div>
-
-                            <h2>Protection Categories</h2>
-                            <p>From cameras and alarms to smart locks, sensors, and integrations.</p>
-                        </article>
-
-                        <article class="contact-counter" data-aos="fade-up" data-aos-delay="160">
-                            <div class="contact-counter__value">
-                                <span data-counter-target="1">0</span>
-                                <small>Platform</small>
-                            </div>
-
-                            <h2>Organized Comparison</h2>
-                            <p>AegisHome helps structure the first step more clearly.</p>
-                        </article>
-
-                        <article class="contact-counter" data-aos="fade-up" data-aos-delay="240">
-                            <div class="contact-counter__value contact-counter__value--text">
-                                <span>Home</span>
-                                <small>Focused</small>
-                            </div>
-
-                            <h2>Request Guidance</h2>
-                            <p>Built around homeowner needs, entry points, and protection priorities.</p>
-                        </article>
-                    </div>
+                <div class="contact-counter__value">
+                    <span data-counter-target="1">0</span>
+                    <small>Request</small>
                 </div>
-            </section>
+
+                <div class="contact-counter__body">
+                    <h2>Simple Start</h2>
+                    <p>One clear form to begin comparing security service options.</p>
+                </div>
+            </article>
+
+            <article class="contact-counter">
+                <i class="contact-counter__icon" data-lucide="layout-grid" aria-hidden="true"></i>
+
+                <div class="contact-counter__value">
+                    <span data-counter-target="6">0</span>
+                    <small>Services</small>
+                </div>
+
+                <div class="contact-counter__body">
+                    <h2>Protection Categories</h2>
+                    <p>From cameras and alarms to smart locks, sensors, and integrations.</p>
+                </div>
+            </article>
+
+            <article class="contact-counter">
+                <i class="contact-counter__icon" data-lucide="radar" aria-hidden="true"></i>
+
+                <div class="contact-counter__value">
+                    <span data-counter-target="1">0</span>
+                    <small>Platform</small>
+                </div>
+
+                <div class="contact-counter__body">
+                    <h2>Organized Comparison</h2>
+                    <p>AegisHome helps structure the first step more clearly.</p>
+                </div>
+            </article>
+
+            <article class="contact-counter">
+                <i class="contact-counter__icon" data-lucide="house-wifi" aria-hidden="true"></i>
+
+                <div class="contact-counter__value contact-counter__value--text">
+                    <span>Home</span>
+                    <small>Focused</small>
+                </div>
+
+                <div class="contact-counter__body">
+                    <h2>Request Guidance</h2>
+                    <p>Built around homeowner needs, entry points, and protection priorities.</p>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
 
             <section class="contact-main section section--light" id="contact-form" aria-labelledby="contact-form-title">
                 <div class="container">
@@ -381,21 +397,22 @@
                                         autocomplete="tel" />
                                 </div>
 
-                                <div class="form-field">
+                                <div class="form-field form-field--select">
                                     <label for="service-category">Service Category</label>
-                                    <select id="service-category" name="service-category" required>
-                                        <option value="">Choose a category</option>
-                                        <option value="security-system-installation">Security System Installation
-                                        </option>
-                                        <option value="security-cameras-cctv">Security Cameras &amp; CCTV</option>
-                                        <option value="alarm-monitoring">Alarm Monitoring</option>
-                                        <option value="smart-locks-access-control">Smart Locks &amp; Access Control
-                                        </option>
-                                        <option value="doorbell-cameras-entry-sensors">Doorbell Cameras &amp; Entry
-                                            Sensors</option>
-                                        <option value="smart-home-security-integration">Smart Home Security Integration
-                                        </option>
-                                    </select>
+                                
+                                    <div class="select-control">
+                                        <select id="service-category" name="service-category" required>
+                                            <option value="">Choose a category</option>
+                                            <option value="security-system-installation">Security System Installation</option>
+                                            <option value="security-cameras-cctv">Security Cameras &amp; CCTV</option>
+                                            <option value="alarm-monitoring">Alarm Monitoring</option>
+                                            <option value="smart-locks-access-control">Smart Locks &amp; Access Control</option>
+                                            <option value="doorbell-cameras-entry-sensors">Doorbell Cameras &amp; Entry Sensors</option>
+                                            <option value="smart-home-security-integration">Smart Home Security Integration</option>
+                                        </select>
+                                
+                                        <i data-lucide="chevron-down" aria-hidden="true"></i>
+                                    </div>
                                 </div>
 
                                 <div class="form-field">
@@ -416,11 +433,65 @@
                                 <i data-lucide="arrow-right" aria-hidden="true"></i>
                             </button>
 
-                            <p class="form-note">
-                                By submitting this form, you agree to be contacted about your request and to review
-                                provider options.
-                            </p>
                         </form>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contact-secure section section--milk" id="secure-spaces" aria-labelledby="contact-secure-title">
+                <div class="container-wide">
+                    <div class="contact-secure__grid">
+                        <div class="contact-secure__media">
+                            <figure class="contact-secure__photo contact-secure__photo--small">
+                                <img src="assets/images/contact/secure-lock.jpg"
+                                    alt="Smart security lock with glowing digital protection lines" loading="lazy" />
+                            </figure>
+            
+                            <figure class="contact-secure__photo contact-secure__photo--tall">
+                                <img src="assets/images/contact/security-consultant.jpg"
+                                    alt="Security consultant helping compare home protection options" loading="lazy" />
+                            </figure>
+            
+                            <span class="contact-secure__line contact-secure__line--one" aria-hidden="true"></span>
+                            <span class="contact-secure__line contact-secure__line--two" aria-hidden="true"></span>
+                        </div>
+            
+                        <div class="contact-secure__content">
+                            <p class="section-kicker section-kicker--dark" data-aos="fade-up">
+                                Secure digital spaces
+                            </p>
+            
+                            <h2 id="contact-secure-title" data-aos="fade-up" data-aos-delay="70">
+                                We help organize the first step toward safer home protection.
+                            </h2>
+            
+                            <p data-aos="fade-up" data-aos-delay="130">
+                                AegisHome gives homeowners a clearer way to compare local provider options for cameras,
+                                alarms, smart locks, entry sensors, monitoring-ready systems, and connected security setups.
+                            </p>
+            
+                            <ul class="contact-secure__list" data-aos="fade-up" data-aos-delay="190">
+                                <li>
+                                    <i data-lucide="check" aria-hidden="true"></i>
+                                    Compare services by protection goal
+                                </li>
+            
+                                <li>
+                                    <i data-lucide="check" aria-hidden="true"></i>
+                                    Review options before choosing who to contact
+                                </li>
+            
+                                <li>
+                                    <i data-lucide="check" aria-hidden="true"></i>
+                                    Keep your request simple, focused, and organized
+                                </li>
+                            </ul>
+            
+                            <a class="contact-secure__link" href="all-services.html" data-aos="fade-up" data-aos-delay="250">
+                                View Services
+                                <i data-lucide="arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>
