@@ -1,4 +1,4 @@
-/* assets/js/legal.js */
+
 
 'use strict';
 

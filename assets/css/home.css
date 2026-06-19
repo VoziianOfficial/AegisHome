@@ -1,16 +1,12 @@
-/* assets/css/home.css */
 
-/* =========================
-   HOME PAGE
-   ========================= */
+
+
 
 .home-page {
     background: var(--color-white);
 }
 
-/* =========================
-   HOME COUNTERS
-   ========================= */
+
 
 .home-counters {
     position: relative;
@@ -115,9 +111,7 @@
     line-height: 1.45;
 }
 
-/* =========================
-   POPULAR SERVICES
-   ========================= */
+
 
 .home-services {
     overflow: hidden;
@@ -345,9 +339,7 @@
     transform: translateX(4px);
 }
 
-/* =========================
-   SPLIT SECTIONS
-   ========================= */
+
 
 .home-split {
     overflow: hidden;
@@ -472,9 +464,7 @@
     background: rgba(255, 255, 255, 0.72);
 }
 
-/* =========================
-   PRIORITIES
-   ========================= */
+
 
 .home-priorities {
     overflow: hidden;
@@ -678,9 +668,7 @@
     line-height: 1.6;
 }
 
-/* =========================
-   HOME CONTACT CTA
-   ========================= */
+
 
 .home-contact {
     overflow: hidden;
@@ -752,9 +740,7 @@
     gap: 12px;
 }
 
-/* =========================
-   IMAGE REVEAL OPTIONAL
-   ========================= */
+
 
 [data-image-reveal] {
     opacity: 0;
@@ -769,9 +755,7 @@
     transform: translateY(0);
 }
 
-/* =========================
-   RESPONSIVE
-   ========================= */
+
 
 @media (max-width: 1180px) {
     .home-service-grid {
@@ -1022,9 +1006,7 @@
     }
 }
 
-/* =========================
-   HOME QUESTIONS LAB
-   ========================= */
+
 
 .home-questions {
     overflow: hidden;
@@ -1414,7 +1396,7 @@
     }
 }
 
-/* Stable fixed answer panel */
+
 .home-questions__board {
     align-items: stretch;
 }
@@ -1522,9 +1504,7 @@
     }
 }
 
-/* =========================
-   HOME COUNTERS 3D LIGHT STRIP
-   ========================= */
+
 
 .home-counters {
     position: relative;
@@ -1816,9 +1796,7 @@
 }
 
 
-/* =========================
-   HOME ICON MARQUEE
-   ========================= */
+
 
 .home-icon-marquee {
     position: relative;
@@ -1925,9 +1903,7 @@
     }
 }
 
-/* =========================
-   HOME CONTACT CTA — BLACK 3D CARD
-   ========================= */
+
 
 .home-contact {
     position: relative;
@@ -1985,7 +1961,7 @@
         box-shadow var(--transition-main);
 }
 
-/* 3D слой сзади */
+
 .home-contact__card::before {
     content: "";
     position: absolute;
@@ -2000,7 +1976,7 @@
         background var(--transition-main);
 }
 
-/* Блик по карточке */
+
 .home-contact__card::after {
     content: "";
     position: absolute;
@@ -2085,7 +2061,7 @@
     gap: 12px;
 }
 
-/* Кнопки внутри этой секции чуть дороже */
+
 .home-contact .btn--primary {
     background: var(--color-lime);
     box-shadow:
@@ -2105,7 +2081,7 @@
     background: var(--color-yellow);
 }
 
-/* tablet */
+
 @media (max-width: 980px) {
     .home-contact__card {
         grid-template-columns: 1fr;
@@ -2117,7 +2093,7 @@
     }
 }
 
-/* mobile */
+
 @media (max-width: 560px) {
     .home-contact {
         padding: 42px 0;

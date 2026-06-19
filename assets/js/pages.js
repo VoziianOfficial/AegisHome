@@ -1,4 +1,4 @@
-/* assets/js/pages.js */
+
 
 'use strict';
 

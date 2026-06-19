@@ -1,8 +1,6 @@
-/* assets/css/services.css */
 
-/* =========================
-   SERVICE PAGES BASE
-   ========================= */
+
+
 
 .service-page {
     background: var(--color-white);
@@ -12,9 +10,7 @@
     min-height: clamp(430px, 54vw, 520px);
 }
 
-/* =========================
-   SERVICE MARQUEE
-   ========================= */
+
 
 .service-marquee {
     position: relative;
@@ -100,9 +96,7 @@
     background: var(--color-lime);
 }
 
-/* =========================
-   SERVICE OVERVIEW SPLIT
-   ========================= */
+
 
 .service-overview {
     overflow: hidden;
@@ -267,9 +261,7 @@
     line-height: 1.55;
 }
 
-/* =========================
-   SERVICE FEATURE CARDS
-   ========================= */
+
 
 .service-features {
     overflow: hidden;
@@ -330,9 +322,7 @@
     box-shadow: 0 0 22px rgba(140, 255, 63, 0.38);
 }
 
-/* =========================
-   SERVICE FAQ
-   ========================= */
+
 
 .service-faq {
     overflow: hidden;
@@ -367,9 +357,7 @@
     min-width: 0;
 }
 
-/* =========================
-   RELATED SERVICES GALLERY
-   ========================= */
+
 
 .service-related {
     overflow: hidden;
@@ -491,9 +479,7 @@
     filter: drop-shadow(0 0 12px rgba(255, 216, 77, 0.34));
 }
 
-/* =========================
-   RESPONSIVE
-   ========================= */
+
 
 @media (max-width: 1180px) {
 
@@ -638,10 +624,7 @@
     }
 }
 
-/* =========================
-   FIX RELATED SERVICES OVERFLOW
-   cards must not overlap next section
-   ========================= */
+
 
 .service-related {
     position: relative;
@@ -671,7 +654,7 @@
     transform: translateZ(0);
 }
 
-/* reveal для этих карточек делаем спокойнее, чтобы они не вылезали вниз */
+
 .service-related-card.js-reveal {
     opacity: 0;
     translate: 0 28px !important;
@@ -692,21 +675,18 @@
     transform: translateZ(0) !important;
 }
 
-/* на hover двигаем только фото/иконку, не всю карточку */
+
 .service-related-card:hover {
     translate: 0 0 !important;
     transform: translateZ(0) !important;
 }
 
-/* чуть уменьшаем zoom фото, чтобы не было визуального распирания */
+
 .service-related-card:hover img {
     transform: scale(1.055);
 }
 
-/* =========================
-   FIX RELATED SERVICES SPACING
-   add gaps between cards + safe bottom
-   ========================= */
+
 
 .service-related {
     padding-bottom: clamp(48px, 6vw, 84px);
@@ -755,10 +735,7 @@
 }
 
 
-/* =========================
-   SERVICE COMPARE PATH
-   no cards / comparison columns
-   ========================= */
+
 
 .service-compare {
     position: relative;
@@ -959,10 +936,7 @@
     }
 }
 
-/* =========================
-   SERVICE COMPARE REVEAL
-   smooth column appearance
-   ========================= */
+
 
 .service-compare__column.js-reveal {
     opacity: 0;

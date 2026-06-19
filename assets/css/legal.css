@@ -1,16 +1,12 @@
-/* assets/css/legal.css */
 
-/* =========================
-   LEGAL PAGES BASE
-   ========================= */
+
+
 
 .legal-page {
     background: var(--color-white);
 }
 
-/* =========================
-   LEGAL HERO
-   ========================= */
+
 
 .legal-hero {
     position: relative;
@@ -94,9 +90,7 @@
     color: var(--color-lime);
 }
 
-/* =========================
-   LEGAL OVERVIEW
-   ========================= */
+
 
 .legal-overview {
     overflow: hidden;
@@ -171,9 +165,7 @@
     line-height: 1.7;
 }
 
-/* =========================
-   LEGAL CONTENT
-   ========================= */
+
 
 .legal-content {
     overflow: hidden;
@@ -324,9 +316,7 @@
     transform: translateX(3px);
 }
 
-/* =========================
-   LEGAL CONTACT CTA
-   ========================= */
+
 
 .legal-contact {
     position: relative;
@@ -379,17 +369,13 @@
     gap: 12px;
 }
 
-/* =========================
-   LEGAL READY STATE
-   ========================= */
+
 
 .legal-page.is-ready .legal-card {
     will-change: transform;
 }
 
-/* =========================
-   RESPONSIVE
-   ========================= */
+
 
 @media (max-width: 1080px) {
 
@@ -473,12 +459,9 @@
     }
 }
 
-/* =========================
-   FINAL LEGAL PAGES FIX
-   stronger selectors + correct card layout
-   ========================= */
 
-/* legal cards: marker слева, весь текст справа */
+
+
 .legal-page .legal-card {
     grid-template-columns: 28px minmax(0, 1fr);
     align-items: start;
@@ -496,7 +479,7 @@
     grid-column: 2;
 }
 
-/* Lucide после загрузки превращает i в svg — страхуем все legal icons */
+
 .legal-page .legal-hero__meta i,
 .legal-page .legal-hero__meta svg,
 .legal-page .legal-side-panel>i,
@@ -508,7 +491,7 @@
     flex: 0 0 auto;
 }
 
-/* legal hero */
+
 .legal-page .legal-hero {
     background-size: cover;
     background-position: center;
@@ -519,7 +502,7 @@
     z-index: 2;
 }
 
-/* legal side panel icon */
+
 .legal-page .legal-side-panel>i,
 .legal-page .legal-side-panel>svg {
     display: block;
@@ -530,7 +513,7 @@
     filter: drop-shadow(0 0 18px rgba(140, 255, 63, 0.24));
 }
 
-/* legal contact сделать реально темной/дорогой секцией */
+
 .legal-page .legal-contact {
     position: relative;
     padding: clamp(48px, 6vw, 76px) 0;
@@ -605,7 +588,7 @@
     color: var(--color-yellow);
 }
 
-/* кнопки внутри legal CTA */
+
 .legal-page .legal-contact .btn--primary {
     background: var(--color-lime);
     box-shadow:
@@ -626,7 +609,7 @@
     background: var(--color-yellow);
 }
 
-/* mobile legal cards */
+
 @media (max-width: 768px) {
     .legal-page .legal-card {
         grid-template-columns: 1fr;

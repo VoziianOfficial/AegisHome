@@ -1,4 +1,4 @@
-/* assets/js/home.js */
+
 
 'use strict';
 

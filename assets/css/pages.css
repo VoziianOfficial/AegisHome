@@ -1,9 +1,6 @@
-/* assets/css/pages.css */
 
-/* =========================
-   SHARED INNER PAGES
-   all-services / about / contact
-   ========================= */
+
+
 
 .inner-page {
     background: var(--color-white);
@@ -13,9 +10,7 @@
     min-height: clamp(430px, 54vw, 520px);
 }
 
-/* =========================
-   ALL SERVICES: DARK ICON STRIP
-   ========================= */
+
 
 .services-icon-strip {
     position: relative;
@@ -77,9 +72,7 @@
     filter: drop-shadow(0 0 18px rgba(140, 255, 63, 0.4));
 }
 
-/* =========================
-   ALL SERVICES: INTRO
-   ========================= */
+
 
 .services-intro {
     overflow: hidden;
@@ -227,9 +220,7 @@
     line-height: 1.5;
 }
 
-/* =========================
-   ALL SERVICES: FULL-WIDTH GALLERY
-   ========================= */
+
 
 .services-gallery {
     overflow: hidden;
@@ -366,9 +357,7 @@
     filter: drop-shadow(0 0 12px rgba(255, 216, 77, 0.34));
 }
 
-/* =========================
-   ALL SERVICES CTA
-   ========================= */
+
 
 .services-cta {
     overflow: hidden;
@@ -417,9 +406,7 @@
     gap: 12px;
 }
 
-/* =========================
-   ABOUT: MARQUEE
-   ========================= */
+
 
 .about-marquee {
     min-height: 146px;
@@ -461,9 +448,7 @@
     background: var(--color-lime);
 }
 
-/* =========================
-   ABOUT: OVERVIEW
-   ========================= */
+
 
 .about-overview {
     overflow: hidden;
@@ -591,9 +576,7 @@
     margin-top: 30px;
 }
 
-/* =========================
-   ABOUT: PROTECTION
-   ========================= */
+
 
 .about-protection {
     overflow: hidden;
@@ -676,9 +659,7 @@
     bottom: 34px;
 }
 
-/* =========================
-   ABOUT: REVIEWS
-   ========================= */
+
 
 .about-reviews {
     overflow: hidden;
@@ -874,9 +855,7 @@
     background: var(--color-lime);
 }
 
-/* =========================
-   CONTACT: COUNTERS
-   ========================= */
+
 
 .contact-counters {
     position: relative;
@@ -974,9 +953,7 @@
     line-height: 1.45;
 }
 
-/* =========================
-   CONTACT: MAIN FORM SECTION
-   ========================= */
+
 
 .contact-main {
     overflow: hidden;
@@ -1099,9 +1076,7 @@
     margin-top: 18px;
 }
 
-/* =========================
-   CONTACT: FAQ
-   ========================= */
+
 
 .contact-faq {
     overflow: hidden;
@@ -1136,9 +1111,7 @@
     min-width: 0;
 }
 
-/* =========================
-   RESPONSIVE
-   ========================= */
+
 
 @media (max-width: 1180px) {
     .services-icon-strip__track {
@@ -1378,9 +1351,7 @@
         margin-bottom: 18px;
     }
 }
-/* =========================
-   SERVICES CTA — BLACK 3D CARD
-   ========================= */
+
 
 .services-cta {
     position: relative;
@@ -1442,7 +1413,7 @@
         box-shadow var(--transition-main);
 }
 
-/* 3D задний слой */
+
 .services-cta__card::before {
     content: "";
     position: absolute;
@@ -1457,7 +1428,7 @@
         background var(--transition-main);
 }
 
-/* Блик */
+
 .services-cta__card::after {
     content: "";
     position: absolute;
@@ -1592,9 +1563,7 @@
     }
 }
 
-/* =========================
-   ALL SERVICES QUESTIONS ACCORDION
-   ========================= */
+
 
 .services-questions {
     position: relative;
@@ -1895,11 +1864,9 @@
     }
 }
 
-/* =========================
-   FIX SERVICES QUESTIONS STABLE HOVER
-   ========================= */
 
-/* сами accordion items появляются плавно, но без scale */
+
+
 .services-question-item.js-reveal,
 .services-questions__note.js-reveal {
     opacity: 0;
@@ -1925,7 +1892,7 @@
     will-change: auto;
 }
 
-/* убираем подлёт на hover */
+
 .services-question-item:hover,
 .services-question-item.is-open,
 .services-questions__note:hover {
@@ -1934,7 +1901,7 @@
     transform: none !important;
 }
 
-/* оставляем красивый hover, но без движения */
+
 .services-question-item:hover,
 .services-question-item.is-open {
     border-color: rgba(140, 255, 63, 0.42);
@@ -1945,7 +1912,7 @@
         0 0 26px rgba(140, 255, 63, 0.09);
 }
 
-/* note тоже без прыжков */
+
 .services-questions__note {
     transition:
         border-color var(--transition-main),
@@ -1959,7 +1926,7 @@
     box-shadow: 0 22px 54px rgba(16, 18, 20, 0.09);
 }
 
-/* плюсик тоже не должен резко крутить всю кнопку */
+
 .services-question-button__icon {
     transition:
         background var(--transition-main),
@@ -1972,14 +1939,12 @@
     transform: rotate(180deg);
 }
 
-/* сама кнопка без дерганий */
+
 .services-question-button {
     transform: none !important;
 }
 
-/* =========================
-   SERVICES STRIP
-   ========================= */
+
 
 .services-strip {
     position: relative;
@@ -2156,9 +2121,7 @@
 }
 
 
-/* =========================
-   CONTACT: FULL WIDTH ICON STRIP
-   ========================= */
+
 
 .contact-counters {
     position: relative;
@@ -2369,10 +2332,7 @@
 
 
 
-/* =========================
-   FIX CONTACT COUNTERS ICON POSITION
-   icons top-right
-   ========================= */
+
 
 .contact-counter {
     padding: 8px clamp(76px, 7vw, 108px) 22px 0;
@@ -2420,10 +2380,7 @@
     }
 }
 
-/* =========================
-   CUSTOM SELECT ARROW
-   contact form
-   ========================= */
+
 
 .form-field--select .select-control {
     position: relative;
@@ -2445,7 +2402,7 @@
     display: none;
 }
 
-/* важно: lucide превращает i в svg */
+
 .form-field--select .select-control i,
 .form-field--select .select-control svg {
     position: absolute;
@@ -2488,10 +2445,7 @@
     background: var(--color-white);
 }
 
-/* =========================
-   CONTACT SECURE SPACES
-   two-photo editorial section
-   ========================= */
+
 
 .contact-secure {
     position: relative;
@@ -2772,10 +2726,7 @@
     }
 }
 
-/* =========================
-   FIX CONTACT SECURE PHOTOS
-   equal square photos + wider left media
-   ========================= */
+
 
 .contact-secure__grid {
     grid-template-columns: minmax(520px, 1.12fr) minmax(0, 0.88fr);
@@ -2801,7 +2752,7 @@
     align-self: stretch;
 }
 
-/* убираем старую разную высоту */
+
 .contact-secure__photo--small,
 .contact-secure__photo--tall {
     height: auto;
@@ -2815,7 +2766,7 @@
     object-fit: cover;
 }
 
-/* линии под новые размеры */
+
 .contact-secure__line--one {
     left: clamp(-18px, -2vw, -8px);
     bottom: 34px;
@@ -2854,10 +2805,7 @@
     }
 }
 
-/* =========================
-   FIX CONTACT SECURE PHOTOS HEIGHT
-   taller equal photos
-   ========================= */
+
 
 .contact-secure__media {
     max-width: 920px;
@@ -2868,7 +2816,7 @@
     min-height: clamp(420px, 42vw, 610px);
 }
 
-/* обе фото всё равно одинаковые */
+
 .contact-secure__photo--small,
 .contact-secure__photo--tall {
     height: auto;

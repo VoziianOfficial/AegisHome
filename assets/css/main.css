@@ -1,8 +1,6 @@
-/* assets/css/main.css */
 
-/* =========================
-   AEGISHOME GLOBAL STYLES
-   ========================= */
+
+
 
 :root {
     --color-graphite: #171a1d;
@@ -63,9 +61,7 @@
     --transition-slow: 520ms ease;
 }
 
-/* =========================
-   RESET / BASE
-   ========================= */
+
 
 *,
 *::before,
@@ -152,9 +148,7 @@ h6 {
     background: var(--color-lime);
 }
 
-/* =========================
-   ACCESSIBILITY
-   ========================= */
+
 
 .skip-link {
     position: fixed;
@@ -190,9 +184,7 @@ h6 {
     }
 }
 
-/* =========================
-   LAYOUT HELPERS
-   ========================= */
+
 
 .page {
     position: relative;
@@ -331,9 +323,7 @@ h3 {
     color: var(--color-yellow);
 }
 
-/* =========================
-   ANIMATED LINKS
-   ========================= */
+
 
 .link-line,
 .nav-link,
@@ -378,9 +368,7 @@ h3 {
     color: var(--color-lime);
 }
 
-/* =========================
-   BUTTONS
-   ========================= */
+
 
 .btn {
     position: relative;
@@ -489,9 +477,7 @@ h3 {
     gap: 13px;
 }
 
-/* =========================
-   GLOBAL ICONS
-   ========================= */
+
 
 [data-lucide],
 .lucide {
@@ -519,9 +505,7 @@ h3 {
     filter: drop-shadow(0 0 12px rgba(140, 255, 63, 0.28));
 }
 
-/* =========================
-   HEADER
-   ========================= */
+
 
 .site-header {
     position: fixed;
@@ -790,9 +774,7 @@ h3 {
     transform: rotate(-45deg);
 }
 
-/* =========================
-   MOBILE MENU
-   ========================= */
+
 
 .mobile-menu {
     position: fixed;
@@ -972,9 +954,7 @@ h3 {
     transform: translateY(-2px);
 }
 
-/* =========================
-   GLOBAL HERO
-   ========================= */
+
 
 .page-hero {
     position: relative;
@@ -1074,9 +1054,7 @@ h3 {
     margin-top: 28px;
 }
 
-/* =========================
-   SIDE SECTION RAIL
-   ========================= */
+
 
 .section-rail {
     position: fixed;
@@ -1167,9 +1145,7 @@ h3 {
         0 0 22px rgba(140, 255, 63, 0.55);
 }
 
-/* =========================
-   GLOBAL CARDS / PANELS
-   ========================= */
+
 
 .feature-card,
 .info-card,
@@ -1286,9 +1262,7 @@ h3 {
     line-height: 1.55;
 }
 
-/* =========================
-   GLOBAL ACCORDION BASE
-   ========================= */
+
 
 .accordion {
     display: grid;
@@ -1397,9 +1371,7 @@ h3 {
     background: var(--color-yellow);
 }
 
-/* =========================
-   GLOBAL MARQUEE BASE
-   ========================= */
+
 
 .marquee {
     position: relative;
@@ -1459,9 +1431,7 @@ h3 {
     }
 }
 
-/* =========================
-   FORMS
-   ========================= */
+
 
 .form-panel {
     border: 1px solid var(--border-light);
@@ -1522,9 +1492,7 @@ h3 {
     line-height: 1.5;
 }
 
-/* =========================
-   COOKIE BANNER
-   ========================= */
+
 
 .cookie-banner {
     position: fixed;
@@ -1613,9 +1581,7 @@ h3 {
     background: var(--color-yellow);
 }
 
-/* =========================
-   FOOTER
-   ========================= */
+
 
 .site-footer {
     position: relative;
@@ -1730,9 +1696,7 @@ h3 {
     gap: 16px;
 }
 
-/* =========================
-   RESPONSIVE
-   ========================= */
+
 
 @media (max-width: 1180px) {
     :root {
@@ -1901,10 +1865,7 @@ h3 {
     }
 }
 
-/* =========================
-   GLOBAL REVEAL ANIMATIONS
-   visible premium reveal
-   ========================= */
+
 
 .js-reveal {
     opacity: 0;
@@ -1926,7 +1887,7 @@ h3 {
     will-change: auto;
 }
 
-/* Hero / большие CTA / media появляются выразительнее */
+
 .hero-frame.js-reveal,
 .home-contact__card.js-reveal,
 .services-cta__card.js-reveal,
@@ -1949,7 +1910,7 @@ h3 {
     scale: 1;
 }
 
-/* Карточки в сетках — заметный stagger */
+
 .home-counter.js-reveal,
 .home-service-card.js-reveal,
 .home-priority-card.js-reveal,
@@ -1962,12 +1923,12 @@ h3 {
     scale: 0.972;
 }
 
-/* До появления hover не срабатывает */
+
 .js-reveal:not(.is-revealed) {
     pointer-events: none;
 }
 
-/* AOS для текста тоже делаем заметнее */
+
 [data-aos="fade-up"] {
     opacity: 0;
     transform: translate3d(0, 34px, 0);
