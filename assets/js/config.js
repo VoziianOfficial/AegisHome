@@ -15,8 +15,7 @@ window.AEGIS_SITE_CONFIG = {
         phoneDisplay: '(888) 555-0198',
         phoneButtonText: 'Call AegisHome',
         phoneAria: 'Call AegisHome',
-        email: 'support@aegishome.com',
-        emailLabel: 'support@aegishome.com'
+        email: 'support@aegishome.com'
     },
 
     footer: {
@@ -35,16 +34,34 @@ window.AEGIS_SITE_CONFIG = {
             'AegisHome uses cookies to improve site experience and understand general platform usage.'
     },
 
-  
-    legacyReplacements: {
-        'AegisHome': 'company.name',
-        'Aegis': 'company.logoMain',
-        'Home': 'company.logoAccent',
-        'support@aegishome.com': 'contact.email',
-        '+18885550198': 'contact.phoneRaw',
-        '(888) 555-0198': 'contact.phoneDisplay',
-        'Call AegisHome': 'contact.phoneButtonText',
-        'AH-SEC-2048': 'company.companyId',
-        'USA Service Area': 'company.address'
+    oldValues: {
+        companyNames: [
+            'AegisHome'
+        ],
+
+        emails: [
+            'support@aegishome.com'
+        ],
+
+        phonesRaw: [
+            '+18885550198',
+            '18885550198'
+        ],
+
+        phonesDisplay: [
+            '(888) 555-0198'
+        ],
+
+        phoneButtonTexts: [
+            'Call AegisHome'
+        ],
+
+        companyIds: [
+            'AH-SEC-2048'
+        ],
+
+        addresses: [
+            'USA Service Area'
+        ]
     }
 };

@@ -45,187 +45,244 @@ window.AegisHome = window.AegisHome || {};
     const qs = (selector, scope = document) => scope.querySelector(selector);
     const qsa = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 
-    function getConfigValue(path, fallback = '') {
-        const config = window.AEGIS_SITE_CONFIG;
-
-        if (!config || !path) return fallback;
-
-        return path.split('.').reduce((current, key) => {
-            if (current && Object.prototype.hasOwnProperty.call(current, key)) {
-                return current[key];
-            }
-
-            return undefined;
-        }, config) ?? fallback;
-    }
-
-    function setDerivedConfigValues() {
-        const config = window.AEGIS_SITE_CONFIG;
-
-        if (!config || !config.contact) return;
-
-        const phoneRaw = config.contact.phoneRaw || '';
-        const email = config.contact.email || '';
-
-        config.contact.phoneHref = `tel:${phoneRaw.replace(/[^\d+]/g, '')}`;
-        config.contact.emailHref = `mailto:${email}`;
-    }
-
-    function replaceConfigTokens(value) {
-        if (typeof value !== 'string' || !value.includes('{{')) return value;
-
-        return value.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (match, path) => {
-            return getConfigValue(path, match);
-        });
-    }
-
-    function replaceLegacyValues(value) {
-        const config = window.AEGIS_SITE_CONFIG;
-
-        if (typeof value !== 'string' || !config || !config.legacyReplacements) {
-            return value;
-        }
-
-        const replacements = Object.entries(config.legacyReplacements)
-            .map(([from, path]) => [from, getConfigValue(path, from)])
-            .sort((a, b) => b[0].length - a[0].length);
-
-        let nextValue = value;
-
-        replacements.forEach(([from, to]) => {
-            if (!from || from === to) return;
-
-            nextValue = nextValue.split(from).join(to);
-        });
-
-        return nextValue;
-    }
-
-    function applyConfigToTextNodes(root = document.body) {
-        if (!root) return;
-
-        const ignoredTags = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'SVG', 'PATH']);
-
-        const walker = document.createTreeWalker(
-            root,
-            NodeFilter.SHOW_TEXT,
-            {
-                acceptNode(node) {
-                    const parent = node.parentElement;
-
-                    if (!parent || ignoredTags.has(parent.tagName)) {
-                        return NodeFilter.FILTER_REJECT;
-                    }
-
-                    if (!node.nodeValue || !node.nodeValue.trim()) {
-                        return NodeFilter.FILTER_REJECT;
-                    }
-
-                    return NodeFilter.FILTER_ACCEPT;
-                }
-            }
-        );
-
-        const textNodes = [];
-
-        while (walker.nextNode()) {
-            textNodes.push(walker.currentNode);
-        }
-
-        textNodes.forEach((node) => {
-            const originalValue = node.nodeValue;
-            const tokenValue = replaceConfigTokens(originalValue);
-            const replacedValue = replaceLegacyValues(tokenValue);
-
-            if (replacedValue !== originalValue) {
-                node.nodeValue = replacedValue;
-            }
-        });
-    }
-
-    function applyConfigToAttributes(root = document) {
-        const attributeNames = [
-            'href',
-            'aria-label',
-            'title',
-            'alt',
-            'placeholder',
-            'content',
-            'value'
-        ];
-
-        qsa('*', root).forEach((element) => {
-            attributeNames.forEach((attributeName) => {
-                if (!element.hasAttribute(attributeName)) return;
-
-                const originalValue = element.getAttribute(attributeName);
-                const tokenValue = replaceConfigTokens(originalValue);
-                const replacedValue = replaceLegacyValues(tokenValue);
-
-                if (replacedValue !== originalValue) {
-                    element.setAttribute(attributeName, replacedValue);
-                }
-            });
-        });
-    }
-
-    function applyConfigDataAttributes(root = document) {
-        qsa('[data-config-text]', root).forEach((element) => {
-            const path = element.getAttribute('data-config-text');
-            element.textContent = getConfigValue(path, element.textContent);
-        });
-
-        qsa('[data-config-html]', root).forEach((element) => {
-            const path = element.getAttribute('data-config-html');
-            element.innerHTML = getConfigValue(path, element.innerHTML);
-        });
-
-        qsa('[data-config-attr]', root).forEach((element) => {
-            const configAttributes = element.getAttribute('data-config-attr');
-
-            if (!configAttributes) return;
-
-            configAttributes.split(',').forEach((pair) => {
-                const [attributeName, path] = pair.split(':').map((item) => item.trim());
-
-                if (!attributeName || !path) return;
-
-                element.setAttribute(attributeName, getConfigValue(path, element.getAttribute(attributeName) || ''));
-            });
-        });
-    }
-
-    function applyConfigToLinks(root = document) {
+    function initSiteConfig(root = document) {
         const config = window.AEGIS_SITE_CONFIG;
 
         if (!config) return;
 
-        qsa('a[href^="tel:"]', root).forEach((link) => {
-            link.setAttribute('href', getConfigValue('contact.phoneHref', link.getAttribute('href')));
+        const phoneHref = `tel:${String(config.contact.phoneRaw || '').replace(/[^\d+]/g, '')}`;
+        const emailHref = `mailto:${config.contact.email || ''}`;
 
-            if (link.hasAttribute('data-config-phone-button')) {
-                link.textContent = getConfigValue('contact.phoneButtonText', link.textContent);
+        const escapeRegExp = (value) => {
+            return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        };
+
+        const normalizeList = (items) => {
+            return Array.isArray(items) ? items.filter(Boolean) : [];
+        };
+
+        const replacementPairs = [];
+
+        const addPairs = (oldValues, newValue) => {
+            normalizeList(oldValues).forEach((oldValue) => {
+                if (!oldValue || oldValue === newValue) return;
+
+                replacementPairs.push({
+                    from: oldValue,
+                    to: newValue
+                });
+            });
+        };
+
+        addPairs(config.oldValues?.companyNames, config.company.name);
+        addPairs(config.oldValues?.emails, config.contact.email);
+        addPairs(config.oldValues?.phonesRaw, config.contact.phoneRaw);
+        addPairs(config.oldValues?.phonesDisplay, config.contact.phoneDisplay);
+        addPairs(config.oldValues?.phoneButtonTexts, config.contact.phoneButtonText);
+        addPairs(config.oldValues?.companyIds, config.company.companyId);
+        addPairs(config.oldValues?.addresses, config.company.address);
+
+        replacementPairs.sort((a, b) => b.from.length - a.from.length);
+
+        const replaceValue = (value) => {
+            if (typeof value !== 'string' || !value) return value;
+
+            let nextValue = value;
+
+            replacementPairs.forEach(({ from, to }) => {
+                nextValue = nextValue.replace(new RegExp(escapeRegExp(from), 'g'), to);
+            });
+
+            return nextValue;
+        };
+
+        const updateTextNodes = () => {
+            const ignoredTags = new Set([
+                'SCRIPT',
+                'STYLE',
+                'NOSCRIPT',
+                'SVG',
+                'PATH'
+            ]);
+
+            const walker = document.createTreeWalker(
+                root.body || document.body,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode(node) {
+                        const parent = node.parentElement;
+
+                        if (!parent || ignoredTags.has(parent.tagName)) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+
+                        if (!node.nodeValue || !node.nodeValue.trim()) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                }
+            );
+
+            const nodes = [];
+
+            while (walker.nextNode()) {
+                nodes.push(walker.currentNode);
             }
-        });
 
-        qsa('a[href^="mailto:"]', root).forEach((link) => {
-            link.setAttribute('href', getConfigValue('contact.emailHref', link.getAttribute('href')));
+            nodes.forEach((node) => {
+                const nextValue = replaceValue(node.nodeValue);
 
-            if (link.hasAttribute('data-config-email-text')) {
-                link.textContent = getConfigValue('contact.email', link.textContent);
-            }
-        });
+                if (nextValue !== node.nodeValue) {
+                    node.nodeValue = nextValue;
+                }
+            });
+        };
+
+        const updateAttributes = () => {
+            const attributeNames = [
+                'href',
+                'aria-label',
+                'title',
+                'alt',
+                'placeholder',
+                'content',
+                'value'
+            ];
+
+            Array.from(root.querySelectorAll('*')).forEach((element) => {
+                attributeNames.forEach((attributeName) => {
+                    if (!element.hasAttribute(attributeName)) return;
+
+                    const currentValue = element.getAttribute(attributeName);
+                    const nextValue = replaceValue(currentValue);
+
+                    if (nextValue !== currentValue) {
+                        element.setAttribute(attributeName, nextValue);
+                    }
+                });
+            });
+        };
+
+        const updateLogo = () => {
+            document.querySelectorAll('.site-logo__text-main').forEach((element) => {
+                element.textContent = config.company.logoMain;
+            });
+
+            document.querySelectorAll('.site-logo__text-accent').forEach((element) => {
+                element.textContent = config.company.logoAccent;
+            });
+
+            document.querySelectorAll('.site-logo').forEach((logo) => {
+                logo.setAttribute('aria-label', `${config.company.name} home`);
+            });
+        };
+
+        const updatePhoneLinks = () => {
+            document.querySelectorAll('a[href^="tel:"]').forEach((link) => {
+                link.setAttribute('href', phoneHref);
+
+                const label = link.getAttribute('aria-label');
+
+                if (label && /call|phone|tel|aegis/i.test(label)) {
+                    link.setAttribute('aria-label', config.contact.phoneAria || config.contact.phoneButtonText);
+                }
+
+                const hasOnlyText =
+                    link.children.length === 0 ||
+                    Array.from(link.children).every((child) => child.tagName !== 'I' && child.tagName !== 'SVG');
+
+                if (hasOnlyText) {
+                    link.textContent = config.contact.phoneButtonText || config.contact.phoneDisplay;
+                } else {
+                    Array.from(link.childNodes).forEach((node) => {
+                        if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim()) {
+                            node.nodeValue = node.nodeValue.replace(node.nodeValue.trim(), config.contact.phoneButtonText);
+                        }
+                    });
+                }
+            });
+        };
+
+        const updateEmailLinks = () => {
+            document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
+                link.setAttribute('href', emailHref);
+
+                Array.from(link.childNodes).forEach((node) => {
+                    if (node.nodeType === Node.TEXT_NODE && node.nodeValue.includes('@')) {
+                        node.nodeValue = node.nodeValue.replace(node.nodeValue.trim(), config.contact.email);
+                    }
+                });
+
+                if (!link.textContent.includes('@') && link.children.length === 0) {
+                    link.textContent = config.contact.email;
+                }
+            });
+        };
+
+        const updateFooter = () => {
+            document.querySelectorAll('.site-footer__brand p').forEach((paragraph) => {
+                paragraph.textContent = config.footer.description;
+            });
+
+            document.querySelectorAll('.site-footer__bottom p').forEach((paragraph) => {
+                const yearNode = paragraph.querySelector('[data-current-year]');
+                const year = yearNode ? yearNode.textContent : new Date().getFullYear();
+
+                paragraph.innerHTML = `
+                © <span data-current-year>${year}</span>
+                ${config.company.name}. ${config.footer.copyright}
+                <br>
+                <span class="site-footer__company-line">
+                    ${config.company.companyId} · ${config.company.address}
+                </span>
+            `;
+            });
+        };
+
+        const updateLegalBlocks = () => {
+            document.querySelectorAll('.cookie-banner__inner p').forEach((paragraph) => {
+                paragraph.firstChild.nodeValue = `${config.legal.cookieNotice} `;
+            });
+
+            const possibleDisclaimerSelectors = [
+                '.legal-disclaimer',
+                '.site-disclaimer',
+                '.footer-disclaimer',
+                '[class*="disclaimer"]'
+            ];
+
+            possibleDisclaimerSelectors.forEach((selector) => {
+                document.querySelectorAll(selector).forEach((element) => {
+                    element.textContent = config.legal.disclaimer;
+                });
+            });
+        };
+
+        const updateMeta = () => {
+            document.title = replaceValue(document.title);
+
+            document.querySelectorAll('meta[content]').forEach((meta) => {
+                const currentValue = meta.getAttribute('content');
+                const nextValue = replaceValue(currentValue);
+
+                if (nextValue !== currentValue) {
+                    meta.setAttribute('content', nextValue);
+                }
+            });
+        };
+
+        updateTextNodes();
+        updateAttributes();
+        updateLogo();
+        updatePhoneLinks();
+        updateEmailLinks();
+        updateFooter();
+        updateLegalBlocks();
+        updateMeta();
     }
 
-    function initSiteConfig(root = document) {
-        if (!window.AEGIS_SITE_CONFIG) return;
-
-        setDerivedConfigValues();
-        applyConfigDataAttributes(root);
-        applyConfigToLinks(root);
-        applyConfigToAttributes(root);
-        applyConfigToTextNodes(document.body);
-    }
     function safeCreateIcons() {
         if (window.lucide && typeof window.lucide.createIcons === 'function') {
             window.lucide.createIcons();
