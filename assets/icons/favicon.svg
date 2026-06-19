@@ -1,0 +1,56 @@
+<svg width="260" height="220" viewBox="0 0 260 220" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="aegisHomeLogoTitle">
+    <title id="aegisHomeLogoTitle">AegisHome security alarm logo</title>
+
+    <defs>
+        <linearGradient id="alarmLeft" x1="74" y1="45" x2="130" y2="154" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#9CFF4A" />
+            <stop offset="100%" stop-color="#63E828" />
+        </linearGradient>
+
+        <linearGradient id="alarmRight" x1="130" y1="45" x2="190" y2="154" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#FFE15C" />
+            <stop offset="100%" stop-color="#FFD84D" />
+        </linearGradient>
+
+        <linearGradient id="baseGradient" x1="30" y1="142" x2="230" y2="212" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#24282D" />
+            <stop offset="50%" stop-color="#171A1D" />
+            <stop offset="100%" stop-color="#101214" />
+        </linearGradient>
+
+        <linearGradient id="keyGradient" x1="105" y1="92" x2="155" y2="154" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#24282D" />
+            <stop offset="100%" stop-color="#101214" />
+        </linearGradient>
+
+        <clipPath id="alarmShapeClip">
+            <path d="M76.5 142L88.3 73.5C91.2 56.7 105.7 44.5 122.8 44.5H137.2C154.3 44.5 168.8 56.7 171.7 73.5L183.5 142H76.5Z" />
+        </clipPath>
+
+        <filter id="logoShadow" x="12" y="28" width="236" height="198" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feDropShadow dx="0" dy="16" stdDeviation="14" flood-color="#101214" flood-opacity="0.18" />
+        </filter>
+    </defs>
+
+    <g filter="url(#logoShadow)">
+        <path d="M130 16V38" stroke="#8CFF3F" stroke-width="12" stroke-linecap="round" />
+        <path d="M62 80L40 67" stroke="#8CFF3F" stroke-width="12" stroke-linecap="round" />
+        <path d="M198 80L220 67" stroke="#FFD84D" stroke-width="12" stroke-linecap="round" />
+        <path d="M82 48L70 28" stroke="#8CFF3F" stroke-width="12" stroke-linecap="round" />
+        <path d="M178 48L190 28" stroke="#FFD84D" stroke-width="12" stroke-linecap="round" />
+        <path d="M44 112H18" stroke="#8CFF3F" stroke-width="12" stroke-linecap="round" />
+        <path d="M216 112H242" stroke="#FFD84D" stroke-width="12" stroke-linecap="round" />
+
+        <g clip-path="url(#alarmShapeClip)">
+            <rect x="70" y="40" width="60" height="108" fill="url(#alarmLeft)" />
+            <rect x="130" y="40" width="62" height="108" fill="url(#alarmRight)" />
+            <path d="M130 40H192V148H130V40Z" fill="#FFD84D" opacity="0.18" />
+        </g>
+
+        <circle cx="130" cy="109" r="24" fill="url(#keyGradient)" opacity="0.94" />
+        <path d="M122 128H138V154H122V128Z" fill="url(#keyGradient)" opacity="0.94" />
+
+        <rect x="30" y="142" width="200" height="58" rx="24" fill="url(#baseGradient)" />
+        <path d="M130 142H230V176C230 189.3 219.3 200 206 200H130V142Z" fill="#101214" opacity="0.42" />
+    </g>
+</svg>
